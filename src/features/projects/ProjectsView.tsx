@@ -3,6 +3,7 @@ import { useId, useRef, useState, type ChangeEvent, type FormEvent } from 'react
 import { KeyButton } from '../../components/KeyButton';
 import { APP_STORAGE_KEY } from '../../data/localStore';
 import { createInitialState, type AppState } from '../../domain/models';
+import { ProgressPanel } from '../engagement/ProgressPanel';
 import {
   downloadBackup,
   downloadProject,
@@ -223,6 +224,8 @@ export function ProjectsView({ onOpenProject, state, updateState }: ProjectsView
           <p>Créez un projet pour regrouper ses tâches, ses sprints et ses textes forgés.</p>
         </div>
       )}
+
+      <ProgressPanel practice={state.practice} />
 
       <section className="project-tools" aria-labelledby="project-tools-title">
         <div>

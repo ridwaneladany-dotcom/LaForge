@@ -69,9 +69,9 @@ Cette commande vérifie le formatage, le linting, les tests et le build de produ
 
 ## Déployer
 
-La cible recommandée est **Cloudflare Pages** avec l’intégration GitHub : branche `main`, commande `npm run build` et dossier de sortie `dist`. Aucun domaine acheté n’est requis ; Cloudflare fournit une adresse publique en `*.pages.dev`.
+LaForge est publié avec **Cloudflare Workers Static Assets** et l’intégration GitHub : branche `main`, commande de build `npm run build` et commande de déploiement `npx wrangler deploy`. Aucun domaine acheté n’est requis ; Cloudflare fournit une adresse publique en `*.workers.dev`.
 
-La procédure complète et les réglages exacts sont documentés dans [`docs/deployment/cloudflare-pages.md`](docs/deployment/cloudflare-pages.md).
+La procédure complète et les réglages exacts sont documentés dans [`docs/deployment/cloudflare-workers.md`](docs/deployment/cloudflare-workers.md).
 
 ## Parcourir le dépôt
 
@@ -82,7 +82,7 @@ La procédure complète et les réglages exacts sont documentés dans [`docs/dep
 | [`docs/phase-0/experience-spec.md`](docs/phase-0/experience-spec.md) | Parcours, wireflows et critères d’acceptation |
 | [`docs/phase-0/prototype`](docs/phase-0/prototype) | Prototype interactif autonome de la phase 0 |
 | [`docs/architecture/stack.md`](docs/architecture/stack.md) | Stack, stockage local et stratégie de qualité |
-| [`docs/deployment/cloudflare-pages.md`](docs/deployment/cloudflare-pages.md) | Configuration et vérification du déploiement Cloudflare Pages |
+| [`docs/deployment/cloudflare-workers.md`](docs/deployment/cloudflare-workers.md) | Configuration et vérification du déploiement Cloudflare Workers |
 
 L’application est développée avec React, TypeScript et Vite. Le MVP reste local-first : aucune création de compte n’est nécessaire pour écrire.
 

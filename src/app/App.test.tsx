@@ -2,10 +2,35 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it } from 'vitest';
 
+import { saveAppState } from '../data/localStore';
+import { createInitialState } from '../domain/models';
 import { App } from './App';
 
 describe('App', () => {
-  beforeEach(() => window.localStorage.clear());
+  beforeEach(() => {
+    window.localStorage.clear();
+    const state = createInitialState();
+    state.preferences.hasCompletedOnboarding = true;
+    saveAppState(window.localStorage, state);
+  });
+
+  it('explains the product before the first use', async () => {
+    const user = userEvent.setup();
+    window.localStorage.clear();
+    render(<App />);
+
+    expect(
+      screen.getByRole('heading', { name: 'Un brouillon qui refuse de reculer.' }),
+    ).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Continuer' }));
+    expect(screen.getByRole('heading', { name: 'Trois pièces. Jamais plus.' })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Continuer' }));
+    await user.click(screen.getByRole('button', { name: 'Entrer dans l’atelier' }));
+
+    expect(screen.getByRole('heading', { name: 'Préparez vos pièces.' })).toBeInTheDocument();
+  });
 
   it('introduces the daily preparation', () => {
     render(<App />);

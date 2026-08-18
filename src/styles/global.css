@@ -1,6 +1,3 @@
-@import './tokens.css';
-@import './preparation.css';
-
 :root {
   color: var(--ink);
   background: var(--canvas);

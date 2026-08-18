@@ -119,6 +119,11 @@
   border-bottom-color: var(--ember);
 }
 
+.task-title-input:not(:focus) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .task-guidance,
 .form-help {
   margin: 0.45rem 0 0;

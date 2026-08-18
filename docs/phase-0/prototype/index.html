@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3eee5" />
+    <meta
+      name="description"
+      content="Prototype interactif de la phase 0 de LaForge, une application d'écriture focalisée."
+    />
+    <title>LaForge — Prototype de phase 0</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-view="prepare">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+
+    <div class="prototype-banner" role="status">
+      <span>Prototype de phase 0</span>
+      <button class="text-button" id="reset-prototype" type="button">Réinitialiser</button>
+    </div>
+
+    <main id="main-content">
+      <section class="view prepare-view" aria-labelledby="prepare-title">
+        <header class="app-header">
+          <a class="brand" href="#" aria-label="LaForge, retour à la préparation">
+            <svg aria-hidden="true" viewBox="0 0 32 32" width="30" height="30">
+              <path d="M7 21.5h18M9.5 21.5l2 5h9l2-5M10 16.5h12l3-4H7l3 4Z" />
+              <path class="brand-ember" d="M16 11.5c-2.7-2.1-.7-4.8 1.2-6.5-.1 2 2.8 3.1 1.4 6.5" />
+            </svg>
+            <span>LaForge</span>
+          </a>
+
+          <nav class="header-nav" aria-label="Navigation principale">
+            <button class="nav-item active" type="button" aria-current="page">Aujourd'hui</button>
+            <button class="nav-item" type="button">Projets</button>
+          </nav>
+
+          <button class="profile-button" type="button" aria-label="Ouvrir les réglages du profil">
+            <span aria-hidden="true">RL</span>
+          </button>
+        </header>
+
+        <div class="prepare-layout">
+          <section class="welcome-panel" aria-labelledby="prepare-title">
+            <div class="eyebrow-row">
+              <p class="eyebrow">Mardi 18 août</p>
+              <div class="ember-status" aria-label="Braise active, quatre jours sur les sept derniers">
+                <span class="ember-dot hot"></span>
+                <span class="ember-dot hot"></span>
+                <span class="ember-dot hot"></span>
+                <span class="ember-dot warm"></span>
+                <span class="ember-copy">Braise active</span>
+              </div>
+            </div>
+
+            <h1 id="prepare-title">Qu'allons-nous<br />forger aujourd'hui&nbsp;?</h1>
+            <p class="lead">
+              Trois résultats, pas davantage. Choisis celui qui mérite ton attention maintenant.
+            </p>
+
+            <div class="progress-note">
+              <span class="progress-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18">
+                  <path d="M12 3v18M5.5 7.5 12 3l6.5 4.5M6 17h12" />
+                </svg>
+              </span>
+              <span><strong>6 jets</strong> cette semaine · 1 842 mots de matière</span>
+            </div>
+          </section>
+
+          <section class="task-panel" aria-labelledby="task-title">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Mémoire de master</p>
+                <h2 id="task-title">Les prochains résultats</h2>
+              </div>
+              <button class="icon-button" type="button" aria-label="Options du projet">
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">
+                  <circle cx="5" cy="12" r="1.5" />
+                  <circle cx="12" cy="12" r="1.5" />
+                  <circle cx="19" cy="12" r="1.5" />
+                </svg>
+              </button>
+            </div>
+
+            <div class="task-list" role="radiogroup" aria-label="Choisir la tâche du prochain jet">
+              <button class="task-card selected" type="button" role="radio" aria-checked="true" data-task="0">
+                <span class="task-number">01</span>
+                <span class="task-content">
+                  <span class="task-name">Rédiger l'ouverture du chapitre sur la confiance numérique</span>
+                  <span class="task-meta">Introduction · prochain résultat</span>
+                </span>
+                <span class="task-check" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" width="16" height="16"><path d="m5 10 3 3 7-7" /></svg>
+                </span>
+              </button>
+
+              <button class="task-card" type="button" role="radio" aria-checked="false" data-task="1">
+                <span class="task-number">02</span>
+                <span class="task-content">
+                  <span class="task-name">Expliquer les trois tensions du modèle actuel</span>
+                  <span class="task-meta">Analyse · en attente</span>
+                </span>
+                <span class="task-check" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" width="16" height="16"><path d="m5 10 3 3 7-7" /></svg>
+                </span>
+              </button>
+
+              <button class="task-card" type="button" role="radio" aria-checked="false" data-task="2">
+                <span class="task-number">03</span>
+                <span class="task-content">
+                  <span class="task-name">Esquisser une conclusion qui ouvre la discussion</span>
+                  <span class="task-meta">Conclusion · en attente</span>
+                </span>
+                <span class="task-check" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" width="16" height="16"><path d="m5 10 3 3 7-7" /></svg>
+                </span>
+              </button>
+            </div>
+
+            <div class="commitment-panel">
+              <div class="duration-block">
+                <span class="control-label" id="duration-label">Durée du sprint</span>
+                <div class="duration-options" role="radiogroup" aria-labelledby="duration-label">
+                  <button type="button" role="radio" aria-checked="false" data-duration="5">5</button>
+                  <button class="selected" type="button" role="radio" aria-checked="true" data-duration="15">15</button>
+                  <button type="button" role="radio" aria-checked="false" data-duration="25">25</button>
+                  <button type="button" role="radio" aria-checked="false" data-duration="45">45</button>
+                  <span class="duration-unit">min</span>
+                </div>
+              </div>
+
+              <button class="primary-button forge-button" id="start-sprint" type="button">
+                <span>Forger 15 min</span>
+                <svg aria-hidden="true" viewBox="0 0 20 20" width="18" height="18">
+                  <path d="M4 10h12M11 5l5 5-5 5" />
+                </svg>
+              </button>
+            </div>
+
+            <p class="commitment-hint">
+              Le texte avancera uniquement vers l'avant. Tu pourras tout réviser à la fin.
+            </p>
+          </section>
+        </div>
+      </section>
+
+      <section class="view sprint-view" aria-labelledby="sprint-heading">
+        <header class="sprint-header">
+          <button class="exit-button" id="open-exit" type="button">
+            <svg aria-hidden="true" viewBox="0 0 20 20" width="17" height="17"><path d="M15 10H4M8 6l-4 4 4 4" /></svg>
+            <span>Sortir</span>
+          </button>
+
+          <div class="sprint-task">
+            <span class="sprint-dot" aria-hidden="true"></span>
+            <span id="sprint-task-name">Rédiger l'ouverture du chapitre sur la confiance numérique</span>
+          </div>
+
+          <div class="sprint-status">
+            <span class="save-status"><span class="save-dot"></span> Sauvegardé</span>
+            <time id="timer" aria-live="off">15:00</time>
+          </div>
+        </header>
+
+        <div class="timer-track" aria-hidden="true"><span id="timer-progress"></span></div>
+
+        <div class="writing-shell">
+          <div class="writing-intro" id="sprint-heading">
+            <p class="eyebrow" id="sprint-mode-label">Premier jet · vers l'avant</p>
+            <h1 id="writing-heading">Écris la première version.<br />Tu la façonneras ensuite.</h1>
+          </div>
+
+          <div
+            class="editor"
+            id="editor"
+            contenteditable="true"
+            role="textbox"
+            aria-multiline="true"
+            aria-label="Zone d'écriture du sprint, uniquement vers l'avant"
+            data-placeholder="Commence ici…"
+            spellcheck="true"
+          ></div>
+
+          <div class="writing-footer">
+            <span id="lock-copy">Les retours en arrière sont verrouillés</span>
+            <button class="demo-link" id="finish-demo" type="button">Aperçu du bilan</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="view result-view" aria-labelledby="result-title">
+        <header class="result-header">
+          <a class="brand" href="#" aria-label="LaForge">
+            <svg aria-hidden="true" viewBox="0 0 32 32" width="30" height="30">
+              <path d="M7 21.5h18M9.5 21.5l2 5h9l2-5M10 16.5h12l3-4H7l3 4Z" />
+              <path class="brand-ember" d="M16 11.5c-2.7-2.1-.7-4.8 1.2-6.5-.1 2 2.8 3.1 1.4 6.5" />
+            </svg>
+            <span>LaForge</span>
+          </a>
+          <span class="result-project">Mémoire de master</span>
+        </header>
+
+        <div class="result-layout">
+          <div class="result-mark" aria-hidden="true">
+            <svg viewBox="0 0 80 80" width="72" height="72">
+              <path d="M20 49h40M25 49l5 15h20l5-15M27 39h26l8-10H19l8 10Z" />
+              <path class="result-flame" d="M40 28c-8-6-2-14 3-19-.3 6 8 9 4 19" />
+            </svg>
+          </div>
+
+          <p class="eyebrow">Jet forgé</p>
+          <h1 id="result-title">Tu as créé de la matière.</h1>
+          <p class="result-lead">La correction vient après. Pour l'instant, regarde ce qui existe grâce à toi.</p>
+
+          <div class="result-stats" aria-label="Résumé du jet">
+            <div><strong id="result-minutes">15</strong><span>minutes</span></div>
+            <div><strong id="result-words">0</strong><span>mots</span></div>
+            <div><strong>+1</strong><span>jet cette semaine</span></div>
+          </div>
+
+          <div class="ember-card">
+            <div class="ember-card-copy">
+              <span class="small-label">Ta braise</span>
+              <strong>Le rythme s'installe.</strong>
+              <span>4 jours actifs sur les 7 derniers</span>
+            </div>
+            <div class="ember-week" aria-label="Quatre jours actifs sur sept">
+              <span class="done">L</span>
+              <span class="done">M</span>
+              <span>M</span>
+              <span class="done">J</span>
+              <span>V</span>
+              <span class="today">S</span>
+              <span>D</span>
+            </div>
+          </div>
+
+          <div class="result-actions">
+            <button class="secondary-button" id="review-text" type="button">Réviser le texte</button>
+            <button class="primary-button" id="next-task" type="button">
+              <span>Tâche suivante</span>
+              <svg aria-hidden="true" viewBox="0 0 20 20" width="18" height="18"><path d="M4 10h12M11 5l5 5-5 5" /></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="exit-dialog" id="exit-dialog" aria-labelledby="exit-title">
+      <form method="dialog">
+        <div class="dialog-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 7v5l3 2M21 12a9 9 0 1 1-3-6.7" /></svg>
+        </div>
+        <p class="eyebrow">Sprint en cours</p>
+        <h2 id="exit-title">Arrêter ce jet&nbsp;?</h2>
+        <p>Le texte restera disponible et la tâche restera ouverte. Tu pourras reprendre quand tu voudras.</p>
+        <div class="dialog-actions">
+          <button class="secondary-button" value="continue" type="submit">Continuer à écrire</button>
+          <button class="danger-button" id="confirm-exit" value="exit" type="button">Arrêter et conserver</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Prototype réinitialisé</div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -12,6 +12,12 @@ const startButtonLabel = startButton.querySelector("span");
 const sprintTaskName = document.querySelector("#sprint-task-name");
 const exitDialog = document.querySelector("#exit-dialog");
 const toast = document.querySelector("#toast");
+const onboardingPanels = [...document.querySelectorAll("[data-onboarding-step]")];
+const onboardingDots = [...document.querySelectorAll(".onboarding-progress span")];
+const onboardingTaskOptions = [...document.querySelectorAll(".onboarding-task-option")];
+const onboardingBack = document.querySelector("#onboarding-back");
+const onboardingNext = document.querySelector("#onboarding-next");
+const onboardingNextLabel = onboardingNext.querySelector("span");
 
 let state = loadState();
 let timerHandle = null;
@@ -21,7 +27,9 @@ let isComposing = false;
 
 function defaultState() {
   return {
-    view: "prepare",
+    view: "onboarding",
+    hasOnboarded: false,
+    onboardingStep: 0,
     selectedTask: 0,
     duration: 15,
     draft: "",
@@ -34,7 +42,15 @@ function defaultState() {
 function loadState() {
   try {
     const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    return { ...defaultState(), ...stored };
+    const nextState = { ...defaultState(), ...stored };
+
+    if (stored && typeof stored.hasOnboarded !== "boolean") {
+      nextState.view = "onboarding";
+      nextState.hasOnboarded = false;
+      nextState.onboardingStep = 0;
+    }
+
+    return nextState;
   } catch {
     return defaultState();
   }
@@ -68,6 +84,8 @@ function setView(view) {
 }
 
 function updateControls() {
+  updateOnboarding();
+
   taskCards.forEach((card, index) => {
     const selected = index === state.selectedTask;
     card.classList.toggle("selected", selected);
@@ -84,6 +102,30 @@ function updateControls() {
   sprintTaskName.textContent = taskNames[state.selectedTask];
   editor.textContent = state.draft;
   updateResult();
+}
+
+function updateOnboarding() {
+  const activeStep = Math.max(0, Math.min(state.onboardingStep, onboardingPanels.length - 1));
+  state.onboardingStep = activeStep;
+
+  onboardingPanels.forEach((panel, index) => {
+    panel.classList.toggle("active", index === activeStep);
+    panel.setAttribute("aria-hidden", String(index !== activeStep));
+  });
+
+  onboardingDots.forEach((dot, index) => {
+    dot.classList.toggle("active", index === activeStep);
+    if (index === activeStep) dot.setAttribute("aria-current", "step");
+    else dot.removeAttribute("aria-current");
+  });
+
+  onboardingBack.disabled = activeStep === 0;
+  onboardingNextLabel.textContent = activeStep === onboardingPanels.length - 1 ? "Entrer dans LaForge" : "Continuer";
+}
+
+function completeOnboarding() {
+  state.hasOnboarded = true;
+  setView("prepare");
 }
 
 function startSprint() {
@@ -250,7 +292,7 @@ function resetPrototype() {
   state = defaultState();
   localStorage.removeItem(STORAGE_KEY);
   updateControls();
-  setView("prepare");
+  setView("onboarding");
   showToast("Prototype réinitialisé");
 }
 
@@ -261,6 +303,35 @@ taskCards.forEach((card, index) => {
     saveState();
   });
 });
+
+onboardingTaskOptions.forEach((option) => {
+  option.addEventListener("click", () => {
+    onboardingTaskOptions.forEach((candidate) => {
+      const selected = candidate === option;
+      candidate.classList.toggle("selected", selected);
+      candidate.setAttribute("aria-checked", String(selected));
+    });
+  });
+});
+
+onboardingBack.addEventListener("click", () => {
+  state.onboardingStep = Math.max(0, state.onboardingStep - 1);
+  updateOnboarding();
+  saveState();
+});
+
+onboardingNext.addEventListener("click", () => {
+  if (state.onboardingStep >= onboardingPanels.length - 1) {
+    completeOnboarding();
+    return;
+  }
+
+  state.onboardingStep += 1;
+  updateOnboarding();
+  saveState();
+});
+
+document.querySelector("#skip-onboarding").addEventListener("click", completeOnboarding);
 
 durationButtons.forEach((button) => {
   button.addEventListener("click", () => {

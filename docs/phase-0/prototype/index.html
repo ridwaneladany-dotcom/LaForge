@@ -12,7 +12,7 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body data-view="prepare">
+  <body data-view="onboarding">
     <a class="skip-link" href="#main-content">Aller au contenu</a>
 
     <div class="prototype-banner" role="status">
@@ -21,6 +21,102 @@
     </div>
 
     <main id="main-content">
+      <section class="view onboarding-view" aria-labelledby="onboarding-title">
+        <header class="onboarding-header">
+          <a class="brand" href="#" aria-label="LaForge">
+            <svg aria-hidden="true" viewBox="0 0 32 32" width="30" height="30">
+              <path d="M7 21.5h18M9.5 21.5l2 5h9l2-5M10 16.5h12l3-4H7l3 4Z" />
+              <path class="brand-ember" d="M16 11.5c-2.7-2.1-.7-4.8 1.2-6.5-.1 2 2.8 3.1 1.4 6.5" />
+            </svg>
+            <span>LaForge</span>
+          </a>
+          <button class="text-button onboarding-skip" id="skip-onboarding" type="button">Passer</button>
+        </header>
+
+        <div class="onboarding-shell">
+          <div class="onboarding-progress" aria-label="Progression de l’onboarding">
+            <span class="active" aria-current="step"></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="onboarding-stage">
+            <article class="onboarding-panel active" data-onboarding-step="0">
+              <div class="onboarding-copy">
+                <p class="eyebrow">Bienvenue dans LaForge</p>
+                <h1 id="onboarding-title">Écris d’abord.<br />Façonne ensuite.</h1>
+                <p>
+                  LaForge sépare l’élan de la correction. Pendant un sprint, chaque mot te fait avancer ;
+                  le retour en arrière s’ouvre quand la matière existe.
+                </p>
+              </div>
+              <div class="onboarding-demo-surface">
+                <div class="demo-surface-topline">
+                  <span>Premier jet · vers l’avant</span>
+                  <span class="demo-lock">Correction après le sprint</span>
+                </div>
+                <label for="onboarding-demo">Essaie avec une première phrase</label>
+                <textarea
+                  id="onboarding-demo"
+                  rows="4"
+                  placeholder="Aujourd’hui, je veux expliquer…"
+                  spellcheck="true"
+                ></textarea>
+                <p>Pas besoin que ce soit parfait. Il faut seulement que ça existe.</p>
+              </div>
+            </article>
+
+            <article class="onboarding-panel" data-onboarding-step="1">
+              <div class="onboarding-copy">
+                <p class="eyebrow">Une direction claire</p>
+                <h1>Trois résultats.<br />Un seul maintenant.</h1>
+                <p>
+                  Transforme ton projet en trois résultats concrets maximum, puis choisis celui qui mérite
+                  toute ton attention pendant le prochain sprint.
+                </p>
+              </div>
+              <div class="onboarding-task-demo" role="radiogroup" aria-label="Choisir un exemple de résultat">
+                <button class="onboarding-task-option selected" type="button" role="radio" aria-checked="true">
+                  <span>01</span><strong>Écrire l’ouverture du chapitre</strong><small>Résultat choisi</small>
+                </button>
+                <button class="onboarding-task-option" type="button" role="radio" aria-checked="false">
+                  <span>02</span><strong>Expliquer les trois tensions</strong><small>En attente</small>
+                </button>
+                <button class="onboarding-task-option" type="button" role="radio" aria-checked="false">
+                  <span>03</span><strong>Esquisser la conclusion</strong><small>En attente</small>
+                </button>
+              </div>
+            </article>
+
+            <article class="onboarding-panel" data-onboarding-step="2">
+              <div class="onboarding-copy">
+                <p class="eyebrow">Une contrainte, pas une prison</p>
+                <h1>Ton texte reste<br />toujours à toi.</h1>
+                <p>
+                  Tu gardes le contrôle : sauvegarde locale, sortie possible et révision libre à la fin.
+                  LaForge protège ton attention, jamais au prix de ton travail.
+                </p>
+              </div>
+              <div class="onboarding-trust-grid">
+                <div><span aria-hidden="true">✦</span><strong>Sauvegardé</strong><small>Ton jet reste sur cet appareil.</small></div>
+                <div><span aria-hidden="true">↗</span><strong>Exportable</strong><small>Tu récupères toujours ta matière.</small></div>
+                <div><span aria-hidden="true">○</span><strong>Sans punition</strong><small>Sortir ne détruit jamais ton texte.</small></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="onboarding-actions">
+            <button class="secondary-button" id="onboarding-back" type="button" disabled>Retour</button>
+            <button class="primary-button" id="onboarding-next" type="button">
+              <span>Continuer</span>
+              <svg aria-hidden="true" viewBox="0 0 20 20" width="18" height="18">
+                <path d="M4 10h12M11 5l5 5-5 5" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
       <section class="view prepare-view" aria-labelledby="prepare-title">
         <header class="app-header">
           <a class="brand" href="#" aria-label="LaForge, retour à la préparation">

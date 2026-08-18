@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/statut-phase%203-d95632?style=flat-square" alt="Statut : phase 3" />
+  <img src="https://img.shields.io/badge/statut-phase%204-d95632?style=flat-square" alt="Statut : phase 4" />
   <img src="https://github.com/ridwaneladany-dotcom/LaForge/actions/workflows/ci.yml/badge.svg" alt="Qualité du projet" />
   <img src="https://img.shields.io/badge/licence-MIT-292521?style=flat-square" alt="Licence MIT" />
   <img src="https://img.shields.io/badge/open%20source-oui-567a5e?style=flat-square" alt="Projet open source" />
@@ -39,7 +39,7 @@ L’utilisateur prépare jusqu’à trois résultats concrets, en choisit un, pu
 
 ## État du projet
 
-LaForge est actuellement en **phase 3 : cœur du sprint d’écriture**. Les fondations techniques et le préparateur de tâches sont terminés. Le tunnel d’écriture vers l’avant fonctionne, résiste au rechargement et fait maintenant l’objet d’un durcissement progressif sur les méthodes de saisie et les cas limites.
+LaForge a atteint la **phase 4 : fin de sprint et révision**. Le tunnel d’écriture vers l’avant fonctionne, résiste au rechargement et débouche désormais sur un bilan, une progression quotidienne et un éditeur de révision libre qui préserve le jet original.
 
 L’application comprend déjà :
 

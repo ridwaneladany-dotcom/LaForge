@@ -1,4 +1,4 @@
-export const STORAGE_VERSION = 3 as const;
+export const STORAGE_VERSION = 4 as const;
 export const SPRINT_DURATIONS = [5, 15, 25, 45] as const;
 
 export type SprintDuration = number;
@@ -6,6 +6,7 @@ export type TaskStatus = 'ready' | 'active' | 'completed' | 'archived';
 export type SprintStatus = 'running' | 'completed' | 'exited';
 
 export interface Preferences {
+  activeProjectId: string | null;
   defaultDuration: SprintDuration;
   hasCompletedOnboarding: boolean;
   soundEnabled: boolean;
@@ -34,7 +35,7 @@ export interface WritingTask {
 export interface WritingDraft {
   id: string;
   taskId: string;
-  kind: 'sprint' | 'revision';
+  kind: 'sprint' | 'revision' | 'import';
   sourceDraftId: string | null;
   content: string;
   createdAt: string;
@@ -75,6 +76,7 @@ export function createInitialState(): AppState {
   return {
     version: STORAGE_VERSION,
     preferences: {
+      activeProjectId: null,
       defaultDuration: 15,
       hasCompletedOnboarding: false,
       soundEnabled: true,

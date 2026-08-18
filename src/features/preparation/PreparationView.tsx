@@ -17,6 +17,7 @@ import {
   selectTask,
   updateTask,
 } from './taskState';
+import { getActiveProject } from '../projects/projectState';
 
 type PreparationViewProps = {
   onLaunch: (taskId: string) => void;
@@ -118,6 +119,7 @@ export function PreparationView({ onLaunch, state, updateState }: PreparationVie
   const newTaskId = useId();
   const tasks = getPreparedTasks(state);
   const activeTask = tasks.find((task) => task.status === 'active') ?? tasks[0];
+  const activeProject = getActiveProject(state);
 
   function handleAddTask(event: FormEvent) {
     event.preventDefault();
@@ -181,7 +183,9 @@ export function PreparationView({ onLaunch, state, updateState }: PreparationVie
       <div className="preparation-main">
         <header className="preparation-heading">
           <div>
-            <p className="eyebrow">Atelier du jour</p>
+            <p className="eyebrow">
+              Atelier du jour{activeProject ? ` · ${activeProject.name}` : ''}
+            </p>
             <h1 id="preparation-title">Préparez vos pièces.</h1>
           </div>
           <p>

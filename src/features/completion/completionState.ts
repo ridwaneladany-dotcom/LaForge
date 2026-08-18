@@ -98,8 +98,14 @@ export function createRevisionDraft(
 }
 
 export function completeTask(state: AppState, taskId: string, timestamp: string): AppState {
+  const completedTask = state.tasks.find((task) => task.id === taskId);
   const remainingTasks = state.tasks
-    .filter((task) => task.id !== taskId && task.status === 'ready')
+    .filter(
+      (task) =>
+        task.id !== taskId &&
+        task.projectId === completedTask?.projectId &&
+        task.status === 'ready',
+    )
     .sort((left, right) => left.order - right.order);
   const nextTaskId = remainingTasks[0]?.id;
 

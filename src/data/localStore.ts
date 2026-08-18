@@ -19,12 +19,46 @@ function isAppState(value: unknown): value is AppState {
   return (
     candidate.version === STORAGE_VERSION &&
     typeof candidate.preferences === 'object' &&
+    candidate.preferences !== null &&
+    'activeProjectId' in candidate.preferences &&
     Array.isArray(candidate.projects) &&
     Array.isArray(candidate.tasks) &&
     Array.isArray(candidate.drafts) &&
     Array.isArray(candidate.sprints) &&
     Array.isArray(candidate.practice)
   );
+}
+
+function migrateAppState(value: unknown): AppState | null {
+  if (!value || typeof value !== 'object') return null;
+
+  const candidate = value as Record<string, unknown>;
+  if (
+    candidate.version !== 3 ||
+    !candidate.preferences ||
+    typeof candidate.preferences !== 'object' ||
+    !Array.isArray(candidate.projects) ||
+    !Array.isArray(candidate.tasks) ||
+    !Array.isArray(candidate.drafts) ||
+    !Array.isArray(candidate.sprints) ||
+    !Array.isArray(candidate.practice)
+  ) {
+    return null;
+  }
+
+  const projects = candidate.projects as AppState['projects'];
+  const mostRecentProject = [...projects].sort((left, right) =>
+    right.updatedAt.localeCompare(left.updatedAt),
+  )[0];
+
+  return {
+    ...(candidate as unknown as Omit<AppState, 'preferences' | 'version'>),
+    version: STORAGE_VERSION,
+    preferences: {
+      ...(candidate.preferences as Omit<AppState['preferences'], 'activeProjectId'>),
+      activeProjectId: mostRecentProject?.id ?? null,
+    },
+  };
 }
 
 export function loadAppState(storage: StorageLike): LoadResult {
@@ -34,6 +68,8 @@ export function loadAppState(storage: StorageLike): LoadResult {
   try {
     const parsedState: unknown = JSON.parse(serializedState);
     if (isAppState(parsedState)) return { state: parsedState, recovered: true };
+    const migratedState = migrateAppState(parsedState);
+    if (migratedState) return { state: migratedState, recovered: true };
   } catch {
     // La valeur d'origine reste intacte pour permettre une récupération manuelle.
   }

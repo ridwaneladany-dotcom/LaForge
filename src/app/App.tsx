@@ -9,6 +9,7 @@ import {
 } from '../features/completion/completionState';
 import { Onboarding } from '../features/onboarding/Onboarding';
 import { PreparationView } from '../features/preparation/PreparationView';
+import { ProjectsView } from '../features/projects/ProjectsView';
 import { SprintView } from '../features/sprint/SprintView';
 import { unlockClockAudio } from '../features/sprint/clockAudio';
 import {
@@ -164,15 +165,11 @@ export function App() {
       {activeView === 'today' ? (
         <PreparationView state={state} updateState={setState} onLaunch={launchSprint} />
       ) : (
-        <section className="empty-layout" aria-labelledby="projects-title">
-          <div className="empty-copy">
-            <p className="eyebrow">Archives</p>
-            <h1 id="projects-title" className="hero-title">
-              Vos projets.
-            </h1>
-            <p className="hero-copy">Vos futurs projets et leurs sessions apparaîtront ici.</p>
-          </div>
-        </section>
+        <ProjectsView
+          state={state}
+          updateState={setState}
+          onOpenProject={() => setActiveView('today')}
+        />
       )}
     </AppShell>
   );

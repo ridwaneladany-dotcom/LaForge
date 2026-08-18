@@ -6,6 +6,7 @@ import { AppErrorBoundary } from './app/AppErrorBoundary';
 import './styles/tokens.css';
 import './styles/global.css';
 import './styles/preparation.css';
+import './styles/projects.css';
 import './styles/onboarding.css';
 import './styles/install.css';
 import './styles/sprint.css';

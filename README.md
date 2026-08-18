@@ -10,7 +10,8 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/statut-phase%200-d95632?style=flat-square" alt="Statut : phase 0" />
+  <img src="https://img.shields.io/badge/statut-phase%203-d95632?style=flat-square" alt="Statut : phase 3" />
+  <img src="https://github.com/ridwaneladany-dotcom/LaForge/actions/workflows/ci.yml/badge.svg" alt="Qualité du projet" />
   <img src="https://img.shields.io/badge/licence-MIT-292521?style=flat-square" alt="Licence MIT" />
   <img src="https://img.shields.io/badge/open%20source-oui-567a5e?style=flat-square" alt="Projet open source" />
 </p>
@@ -38,15 +39,32 @@ L’utilisateur prépare jusqu’à trois résultats concrets, en choisit un, pu
 
 ## État du projet
 
-LaForge est actuellement en **phase 0 : cadrage produit et expérience**. Le parcours principal, la boucle d’engagement, les wireflows et un prototype interactif ont été matérialisés. Le développement de l’application commencera après validation des décisions produit structurantes.
+LaForge est actuellement en **phase 3 : cœur du sprint d’écriture**. Les fondations techniques et le préparateur de tâches sont terminés. Le tunnel d’écriture vers l’avant fonctionne, résiste au rechargement et fait maintenant l’objet d’un durcissement progressif sur les méthodes de saisie et les cas limites.
 
-Le prototype documente déjà :
+L’application comprend déjà :
 
 - l’onboarding de première visite ;
 - la préparation de trois résultats maximum ;
 - le sprint d’écriture vers l’avant ;
 - la sortie volontaire sans perte du texte ;
-- le bilan et le passage en révision libre.
+- une minuterie persistante et une sortie volontaire sans perte du texte.
+
+## Lancer LaForge
+
+Prérequis : une version maintenue de Node.js et npm.
+
+```bash
+npm install
+npm run dev
+```
+
+Le terminal affiche l’adresse locale choisie par Vite. Pour exécuter l’ensemble des contrôles avant un commit :
+
+```bash
+npm run check
+```
+
+Cette commande vérifie le formatage, le linting, les tests et le build de production.
 
 ## Parcourir le dépôt
 
@@ -56,8 +74,9 @@ Le prototype documente déjà :
 | [`docs/phase-0/engagement-and-metrics.md`](docs/phase-0/engagement-and-metrics.md) | Boucle d’engagement éthique et indicateurs |
 | [`docs/phase-0/experience-spec.md`](docs/phase-0/experience-spec.md) | Parcours, wireflows et critères d’acceptation |
 | [`docs/phase-0/prototype`](docs/phase-0/prototype) | Prototype interactif autonome de la phase 0 |
+| [`docs/architecture/stack.md`](docs/architecture/stack.md) | Stack, stockage local et stratégie de qualité |
 
-La stack applicative sera choisie au début de la phase 1 à partir des besoins validés. Aucun framework n’est imposé à ce stade.
+L’application est développée avec React, TypeScript et Vite. Le MVP reste local-first : aucune création de compte n’est nécessaire pour écrire.
 
 ## Open source
 

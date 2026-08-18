@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/statut-phase%204-d95632?style=flat-square" alt="Statut : phase 4" />
+  <img src="https://img.shields.io/badge/statut-phase%205-d95632?style=flat-square" alt="Statut : phase 5" />
   <img src="https://github.com/ridwaneladany-dotcom/LaForge/actions/workflows/ci.yml/badge.svg" alt="Qualité du projet" />
   <img src="https://img.shields.io/badge/licence-MIT-292521?style=flat-square" alt="Licence MIT" />
   <img src="https://img.shields.io/badge/open%20source-oui-567a5e?style=flat-square" alt="Projet open source" />
@@ -39,7 +39,7 @@ L’utilisateur prépare jusqu’à trois résultats concrets, en choisit un, pu
 
 ## État du projet
 
-LaForge a atteint la **phase 4 : fin de sprint et révision**. Le tunnel d’écriture vers l’avant fonctionne, résiste au rechargement et débouche désormais sur un bilan, une progression quotidienne et un éditeur de révision libre qui préserve le jet original.
+LaForge a atteint la **phase 5 : persistance, projets et export**. Le tunnel d’écriture vers l’avant fonctionne désormais dans plusieurs projets locaux, avec une migration versionnée, un état de sauvegarde visible et des moyens simples d’emporter ou d’effacer ses données.
 
 L’application comprend déjà :
 
@@ -49,6 +49,10 @@ L’application comprend déjà :
 - la sortie volontaire sans perte du texte ;
 - une minuterie persistante avec tic-tac contrôlable et signal de fin ;
 - un bilan guidé et un éditeur de révision qui préserve le jet original.
+- des projets locaux avec une file indépendante de trois tâches ;
+- l’import de texte et l’export des jets ou projets en TXT et Markdown ;
+- une sauvegarde JSON complète et une suppression locale en deux étapes ;
+- une PWA installable sur mobile et ordinateur.
 
 ## Lancer LaForge
 
@@ -82,6 +86,7 @@ La procédure complète et les réglages exacts sont documentés dans [`docs/dep
 | [`docs/phase-0/experience-spec.md`](docs/phase-0/experience-spec.md) | Parcours, wireflows et critères d’acceptation |
 | [`docs/phase-0/prototype`](docs/phase-0/prototype) | Prototype interactif autonome de la phase 0 |
 | [`docs/architecture/stack.md`](docs/architecture/stack.md) | Stack, stockage local et stratégie de qualité |
+| [`docs/architecture/local-data.md`](docs/architecture/local-data.md) | Version du stockage, migrations, import et export |
 | [`docs/deployment/cloudflare-workers.md`](docs/deployment/cloudflare-workers.md) | Configuration et vérification du déploiement Cloudflare Workers |
 
 L’application est développée avec React, TypeScript et Vite. Le MVP reste local-first : aucune création de compte n’est nécessaire pour écrire.

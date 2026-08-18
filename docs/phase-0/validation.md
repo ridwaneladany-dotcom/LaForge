@@ -2,16 +2,20 @@
 
 ## Périmètre vérifié
 
-Le prototype a été servi localement sans dépendance sur `127.0.0.1:41763` et contrôlé dans le navigateur intégré.
+Le prototype a été servi avec un serveur statique local et contrôlé dans le navigateur intégré.
 
 ## Parcours fonctionnels
 
 | Vérification | Résultat |
 | --- | --- |
+| Affichage de l'onboarding à la première visite | Réussite |
+| Navigation, retour et passage des trois étapes | Réussite |
+| Interaction avec l'exemple de tâche | Réussite |
 | Sélection d'une tâche parmi trois | Réussite |
 | Sélection d'une durée rapide | Réussite |
 | Lancement immédiat d'un sprint | Réussite |
 | Focus automatique dans l'éditeur | Réussite |
+| Saisie exacte de 125 caractères avec accents, `œ`, chiffres et ponctuation | Réussite |
 | Blocage de la flèche gauche et du retour arrière | Réussite |
 | Blocage de l'annulation clavier | Réussite |
 | Conservation du texte après rechargement | Réussite |
@@ -55,6 +59,9 @@ Le prototype a été servi localement sans dépendance sur `127.0.0.1:41763` et 
 
 1. Le badge flottant du prototype recouvrait une action en bas du viewport mobile. Il est désormais masqué dans les états sprint et bilan.
 2. La révision libre n'était pas persistée comme un état distinct. Elle possède désormais son propre état, ses libellés et son comportement déverrouillé après rechargement.
+3. L'éditeur relisait sa mise en page et écrivait dans le stockage local à chaque caractère. La lecture utilise désormais `textContent`, la persistance est différée et vidée avant la fermeture, et la composition de caractères est prise en charge.
+4. Un masque graphique donnait l'impression que certaines lettres disparaissaient. Il a été supprimé : tous les caractères restent visibles avec un contraste constant.
+5. Le badge du prototype pouvait masquer l'action principale de l'onboarding. Il est désormais absent de cet état.
 
 ## Limites volontaires
 
@@ -63,4 +70,3 @@ Le prototype a été servi localement sans dépendance sur `127.0.0.1:41763` et 
 - Le bouton `Aperçu du bilan` raccourcit volontairement le minuteur pour les revues.
 - Le code du prototype ne détermine pas la stack ni l'architecture de production.
 - Une validation avec de vrais utilisateurs reste nécessaire avant de considérer les décisions produit comme approuvées.
-

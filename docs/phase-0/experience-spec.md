@@ -4,7 +4,8 @@
 
 ```mermaid
 flowchart LR
-    A[Arrivée\nProjet récent + braise] --> B[Préparation\n1 à 3 tâches]
+    O[Première visite\nOnboarding interactif] --> A[Arrivée\nProjet récent + braise]
+    A --> B[Préparation\n1 à 3 tâches]
     B --> C[Engagement\nTâche + durée]
     C --> D[Sprint\nÉcriture vers l'avant]
     D -->|temps écoulé| E[Bilan\nJet forgé]
@@ -17,6 +18,13 @@ flowchart LR
 ```
 
 ## États critiques
+
+### 0. Onboarding de première visite
+
+- Expliquer la séparation entre premier jet et correction avant de présenter le tableau de bord.
+- Faire essayer une première phrase et le choix d'un résultat plutôt que de montrer des écrans purement promotionnels.
+- Expliquer explicitement la sauvegarde, la sortie sans perte et la révision libre.
+- Permettre de passer l'onboarding immédiatement et ne pas le répéter une fois terminé.
 
 ### 1. Arrivée
 
@@ -171,14 +179,16 @@ L'accent braise ne colore jamais de grandes surfaces pendant l'écriture. Il doi
 
 - Surfaces opaques pour les zones de lecture.
 - Translucidité seulement pour le chrome flottant et la feuille de sortie.
-- Ombres chaudes, diffuses et peu nombreuses.
+- Contrôles identifiables par une forme, un bord, un reflet supérieur et une ombre noire courte.
+- Surfaces principales plus profondes que les contrôles qu'elles contiennent, sans empiler des cartes décoratives.
+- La pression réduit l'ombre et déplace le contrôle d'un pixel pour donner un retour physique immédiat.
 - Rayons modérés : l'outil doit être accueillant sans devenir ludique ou enfantin.
 
 ## Principes de mouvement
 
 | Moment | But | Mouvement |
 | --- | --- | --- |
-| Pression d'un bouton | Feedback | `scale(0.98)`, 120 ms, ease-out forte |
+| Pression d'un bouton | Feedback | `translateY(1px)` + ombre raccourcie, 120 ms, ease-out forte |
 | Passage au sprint | Continuité spatiale | Le panneau actif s'étend et le chrome s'efface, 220–240 ms |
 | Changement de tâche | État | Transition de couleur quasi instantanée, sans déplacement décoratif |
 | Feuille de sortie | Compréhension spatiale | Entrée depuis le bas sur mobile, fondu centré sur desktop, 240 ms |
@@ -201,7 +211,7 @@ LaForge parle comme un entraîneur calme : direct, concret, jamais culpabilisant
 
 ## Critères d'acceptation du MVP
 
-1. Une nouvelle personne peut expliquer le produit après avoir vu l'arrivée et le bouton principal.
+1. Une nouvelle personne peut expliquer le produit après l'onboarding de première visite.
 2. Un premier sprint peut commencer en moins de 30 secondes sans compte.
 3. Une personne de retour peut reprendre en trois actions maximum.
 4. Pendant le sprint, aucune action ordinaire ne permet de modifier le texte antérieur.
@@ -224,4 +234,3 @@ LaForge parle comme un entraîneur calme : direct, concret, jamais culpabilisant
 - notifications push ;
 - classement, monnaie virtuelle ou récompenses aléatoires ;
 - paiement et offre équipe.
-

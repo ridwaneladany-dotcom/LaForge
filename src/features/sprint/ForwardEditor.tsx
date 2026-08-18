@@ -24,6 +24,7 @@ export function ForwardEditor({
   onWordCountChange,
 }: ForwardEditorProps) {
   const editorRef = useRef<HTMLTextAreaElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
   const composingRef = useRef(false);
   const contentRef = useRef(initialContent);
   const persistTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -35,15 +36,6 @@ export function ForwardEditor({
     onContentChangeRef.current = onContentChange;
     onWordCountChangeRef.current = onWordCountChange;
   });
-
-  useEffect(() => {
-    editorRef.current?.focus();
-
-    return () => {
-      if (persistTimerRef.current) clearTimeout(persistTimerRef.current);
-      onContentChangeRef.current(contentRef.current);
-    };
-  }, []);
 
   function moveCaretToEnd() {
     const editor = editorRef.current;
@@ -57,7 +49,25 @@ export function ForwardEditor({
     onWordCountChangeRef.current(countWords(content));
     if (persistTimerRef.current) clearTimeout(persistTimerRef.current);
     persistTimerRef.current = setTimeout(() => onContentChangeRef.current(content), 250);
+    requestAnimationFrame(updateOverflowState);
   }
+
+  function updateOverflowState() {
+    const editor = editorRef.current;
+    const wrap = wrapRef.current;
+    if (!editor || !wrap) return;
+    wrap.toggleAttribute('data-overflowing', editor.scrollHeight > editor.clientHeight + 4);
+  }
+
+  useEffect(() => {
+    editorRef.current?.focus();
+    updateOverflowState();
+
+    return () => {
+      if (persistTimerRef.current) clearTimeout(persistTimerRef.current);
+      onContentChangeRef.current(contentRef.current);
+    };
+  }, []);
 
   function handleBeforeInput(event: FormEvent<HTMLTextAreaElement>) {
     if (composingRef.current) return;
@@ -120,7 +130,7 @@ export function ForwardEditor({
   }
 
   return (
-    <div className="editor-wrap">
+    <div ref={wrapRef} className="editor-wrap">
       <textarea
         ref={editorRef}
         className="forward-editor"

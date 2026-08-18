@@ -1,4 +1,4 @@
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import type { WritingDraft, WritingSprint, WritingTask } from '../../domain/models';
@@ -45,6 +45,38 @@ const task: WritingTask = {
 afterEach(() => vi.useRealTimers());
 
 describe('SprintView', () => {
+  it('moves focus into the exit dialog and restores it when closing', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-08-18T11:55:00.000Z'));
+    const futureSprint = { ...sprint, plannedEndAt: '2026-08-18T12:00:00.000Z' };
+
+    render(
+      <SprintView
+        draft={draft}
+        onComplete={vi.fn()}
+        onContentChange={vi.fn()}
+        onExit={vi.fn()}
+        onFinishEarly={vi.fn()}
+        onSoundToggle={vi.fn()}
+        saveStatus="saved"
+        soundEnabled={false}
+        sprint={futureSprint}
+        task={task}
+      />,
+    );
+
+    const exitButton = screen.getByRole('button', { name: 'Sortir' });
+    fireEvent.click(exitButton);
+
+    const dialog = screen.getByRole('dialog', { name: /Quitter le sprint/ });
+    expect(screen.getByRole('button', { name: 'Continuer d’écrire' })).toHaveFocus();
+
+    fireEvent.keyDown(dialog, { key: 'Escape' });
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(exitButton).toHaveFocus();
+  });
+
   it('blocks writing at zero before completing the sprint', () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date(timestamp));

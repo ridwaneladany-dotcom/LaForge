@@ -230,7 +230,7 @@ a:focus-visible {
   justify-self: start;
   color: #fff8ef;
   border-color: var(--ember-deep);
-  background: linear-gradient(#e26440, var(--ember));
+  background: linear-gradient(#b93e21, #9f2f18);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.3) inset,
     0 3px 0 var(--ember-deep),

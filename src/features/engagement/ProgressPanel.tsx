@@ -31,6 +31,7 @@ export function ProgressPanel({ practice }: ProgressPanelProps) {
           {overview.days.map((day) => (
             <li
               key={day.date}
+              aria-label={`${day.label} ${day.date.slice(-2)}, ${day.active ? 'jet terminé' : 'aucun jet'}`}
               data-active={day.active || undefined}
               data-today={day.isToday || undefined}
             >
@@ -70,6 +71,12 @@ export function ProgressPanel({ practice }: ProgressPanelProps) {
         <div
           className="mastery-track"
           role="progressbar"
+          aria-label="Progression vers le prochain palier de maîtrise"
+          aria-valuetext={
+            overview.mastery.nextAt
+              ? `${overview.mastery.progress} %, ${overview.mastery.nextAt - overview.minutesWritten} minutes restantes`
+              : 'Palier maximal atteint'
+          }
           aria-valuenow={overview.mastery.progress}
           aria-valuemin={0}
           aria-valuemax={100}

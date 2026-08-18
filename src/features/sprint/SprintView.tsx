@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react';
 
 import { KeyButton } from '../../components/KeyButton';
 import type { WritingDraft, WritingSprint, WritingTask } from '../../domain/models';
@@ -52,6 +52,8 @@ export function SprintView({
   const previousSecondRef = useRef(remainingSeconds);
   const completionTimerRef = useRef<number | null>(null);
   const onCompleteRef = useRef(onComplete);
+  const exitButtonRef = useRef<HTMLButtonElement>(null);
+  const exitDialogRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     onCompleteRef.current = onComplete;
@@ -103,6 +105,16 @@ export function SprintView({
     return startTimeUpAlarm();
   }, [soundEnabled, timeUp]);
 
+  useEffect(() => {
+    if (!confirmExit) return;
+    const dialog = exitDialogRef.current;
+    const exitButton = exitButtonRef.current;
+    const firstButton = dialog?.querySelector<HTMLButtonElement>('button');
+    firstButton?.focus();
+
+    return () => exitButton?.focus();
+  }, [confirmExit]);
+
   function toggleSound() {
     const nextEnabled = !soundEnabled;
     onSoundToggle(nextEnabled);
@@ -116,9 +128,32 @@ export function SprintView({
     onContentChange(content);
   }
 
+  function handleExitDialogKeyDown(event: KeyboardEvent<HTMLElement>) {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setConfirmExit(false);
+      return;
+    }
+
+    if (event.key !== 'Tab') return;
+    const buttons = [
+      ...(exitDialogRef.current?.querySelectorAll<HTMLButtonElement>('button') ?? []),
+    ];
+    const firstButton = buttons[0];
+    const lastButton = buttons.at(-1);
+
+    if (event.shiftKey && document.activeElement === firstButton) {
+      event.preventDefault();
+      lastButton?.focus();
+    } else if (!event.shiftKey && document.activeElement === lastButton) {
+      event.preventDefault();
+      firstButton?.focus();
+    }
+  }
+
   return (
     <main className="sprint-screen">
-      <div className="sprint-content" inert={timeUp}>
+      <div className="sprint-content" inert={timeUp || confirmExit}>
         <header className="sprint-header">
           <div className="sprint-task">
             <span>Pièce active</span>
@@ -141,7 +176,12 @@ export function SprintView({
               <span aria-hidden="true">{soundEnabled ? '◖' : '×'}</span>
               Tic-tac {soundEnabled ? 'actif' : 'coupé'}
             </button>
-            <button className="exit-link" type="button" onClick={() => setConfirmExit(true)}>
+            <button
+              ref={exitButtonRef}
+              className="exit-link"
+              type="button"
+              onClick={() => setConfirmExit(true)}
+            >
               Sortir
             </button>
           </div>
@@ -176,10 +216,12 @@ export function SprintView({
       {confirmExit && (
         <div className="exit-backdrop" role="presentation">
           <section
+            ref={exitDialogRef}
             className="exit-dialog paper-panel"
             role="dialog"
             aria-modal="true"
             aria-labelledby="exit-title"
+            onKeyDown={handleExitDialogKeyDown}
           >
             <p className="eyebrow">Sortie anticipée</p>
             <h2 id="exit-title">Quitter le sprint&nbsp;?</h2>

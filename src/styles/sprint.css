@@ -195,8 +195,9 @@
   tab-size: 2;
 }
 
-.forward-editor:focus {
-  outline: none;
+.forward-editor:focus-visible {
+  outline: 3px solid rgba(212, 81, 45, 0.34);
+  outline-offset: -3px;
 }
 
 .forward-editor::placeholder {

@@ -429,8 +429,9 @@
   resize: vertical;
 }
 
-.revision-editor:focus {
-  outline: none;
+.revision-editor:focus-visible {
+  outline: 3px solid rgba(212, 81, 45, 0.34);
+  outline-offset: -3px;
 }
 
 .revision-status {

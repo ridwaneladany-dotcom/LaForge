@@ -1,0 +1,408 @@
+.key-button:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.65);
+  opacity: 0.55;
+  transform: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.preparation-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.65fr);
+  align-items: start;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.preparation-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2.25rem;
+}
+
+.preparation-heading h1,
+.review-ticket h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5.8rem);
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+.preparation-heading > p {
+  flex: none;
+  margin: 0 0 0.45rem;
+  color: var(--ink-muted);
+  font-family: var(--font-typewriter);
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.task-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.task-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  min-height: 7.5rem;
+  padding: 1rem;
+  border: 1px solid var(--edge);
+  background: var(--paper-aged);
+  box-shadow:
+    0 2px 0 #bbae9b,
+    0 7px 16px rgba(49, 39, 28, 0.11);
+}
+
+.task-card[data-active='true'] {
+  border-left: 5px solid var(--ember);
+  background: var(--paper);
+  box-shadow: var(--shadow-paper);
+}
+
+.task-select {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border: 1px solid var(--edge);
+  border-radius: 0;
+  color: var(--ink-muted);
+  background: #e8dfd2;
+  box-shadow: var(--shadow-key);
+  cursor: pointer;
+  font-family: var(--font-typewriter);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.task-select[aria-pressed='true'] {
+  color: white;
+  border-color: var(--ember-deep);
+  background: var(--ember);
+  box-shadow: var(--shadow-key-pressed);
+  transform: translateY(2px);
+}
+
+.task-title-input {
+  width: 100%;
+  padding: 0.25rem 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  color: var(--ink);
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.3vw, 1.75rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.task-title-input:focus {
+  outline: none;
+  border-bottom-color: var(--ember);
+}
+
+.task-guidance,
+.form-help {
+  margin: 0.45rem 0 0;
+  color: var(--ink-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.task-guidance[data-ready='true'] {
+  color: var(--success);
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.task-actions button {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--edge);
+  border-radius: 0;
+  color: var(--ink-muted);
+  background: #f4ede3;
+  box-shadow: 0 2px 0 #bbae9b;
+  cursor: pointer;
+  font-family: var(--font-typewriter);
+}
+
+.task-actions button:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #bbae9b;
+}
+
+.task-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.28;
+}
+
+.add-task-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding: 1.5rem;
+}
+
+.add-task-form > label,
+.field-group > label,
+.field-label,
+.commitment-panel legend {
+  color: var(--ink-muted);
+  font-family: var(--font-typewriter);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.add-task-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.8rem;
+}
+
+.add-task-row input,
+.number-input,
+.field-group textarea {
+  width: 100%;
+  border: 1px solid var(--edge);
+  border-radius: 0;
+  color: var(--ink);
+  background: rgba(255, 253, 247, 0.82);
+  box-shadow:
+    inset 0 2px 4px rgba(49, 39, 28, 0.08),
+    0 1px 0 white;
+}
+
+.add-task-row input {
+  min-height: 3rem;
+  padding: 0.7rem 0.85rem;
+}
+
+.add-task-row input:focus,
+.number-input:focus,
+.field-group textarea:focus {
+  outline: 2px solid rgba(212, 81, 45, 0.28);
+  outline-offset: 2px;
+  border-color: var(--ember);
+}
+
+.form-help[data-error='true'] {
+  color: var(--ember-deep);
+}
+
+.commitment-panel {
+  position: sticky;
+  top: 2rem;
+  display: grid;
+  gap: 2rem;
+  min-height: 34rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.commitment-panel h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.65rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.commitment-panel fieldset {
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  border: 0;
+}
+
+.commitment-panel legend {
+  margin-bottom: 0.9rem;
+}
+
+.duration-keys {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+}
+
+.field-label {
+  margin-top: 0.5rem;
+}
+
+.number-input {
+  min-height: 2.8rem;
+  padding: 0.65rem 0.75rem;
+  font-family: var(--font-typewriter);
+}
+
+.field-group {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.field-group label span {
+  color: var(--ink-faint);
+  font-weight: 400;
+}
+
+.field-group textarea {
+  min-height: 7rem;
+  padding: 0.85rem;
+  resize: vertical;
+  font-family: var(--font-typewriter);
+  line-height: 1.6;
+}
+
+.review-button {
+  width: 100%;
+}
+
+.empty-settings {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  min-height: 27rem;
+  text-align: center;
+}
+
+.empty-settings > span {
+  color: var(--ember);
+  font-family: var(--font-display);
+  font-size: 4rem;
+}
+
+.empty-settings h2 {
+  margin: 1rem 0 0.5rem;
+}
+
+.empty-settings p {
+  max-width: 18rem;
+  margin: 0;
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+.review-layout {
+  display: grid;
+  min-height: calc(100vh - 16rem);
+  place-items: center;
+}
+
+.review-ticket {
+  width: min(100%, 48rem);
+  padding: clamp(2rem, 5vw, 4.5rem);
+}
+
+.review-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 3rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.review-details div {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.review-details div:nth-child(odd) {
+  padding-right: 1.5rem;
+  border-right: 1px solid var(--line);
+}
+
+.review-details div:nth-child(even) {
+  padding-left: 1.5rem;
+}
+
+.review-details dt,
+.review-ticket blockquote span {
+  margin-bottom: 0.35rem;
+  color: var(--ink-faint);
+  font-family: var(--font-typewriter);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.review-details dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.review-ticket blockquote {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 0 2rem;
+  padding: 1.25rem;
+  border-left: 3px solid var(--ember);
+  background: var(--paper-aged);
+  font-family: var(--font-typewriter);
+  line-height: 1.6;
+}
+
+.review-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.9rem;
+}
+
+.phase-note {
+  margin: 1.25rem 0 0;
+  color: var(--ink-faint);
+  font-size: 0.78rem;
+  text-align: right;
+}
+
+@media (max-width: 760px) {
+  .preparation-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .preparation-heading {
+    align-items: start;
+  }
+
+  .commitment-panel {
+    position: static;
+  }
+
+  .task-card {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .task-actions {
+    grid-column: 2;
+  }
+
+  .add-task-row {
+    grid-template-columns: 1fr;
+  }
+
+  .review-actions {
+    display: grid;
+  }
+}

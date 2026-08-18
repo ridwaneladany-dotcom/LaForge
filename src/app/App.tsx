@@ -1,40 +1,17 @@
 import { useState } from 'react';
 
-import { KeyButton } from '../components/KeyButton';
+import { PreparationView } from '../features/preparation/PreparationView';
 import { AppShell, type AppView } from './AppShell';
+import { usePersistentAppState } from './usePersistentAppState';
 
 export function App() {
   const [activeView, setActiveView] = useState<AppView>('today');
+  const [state, setState] = usePersistentAppState();
 
   return (
     <AppShell activeView={activeView} onViewChange={setActiveView}>
       {activeView === 'today' ? (
-        <section className="empty-layout" aria-labelledby="page-title">
-          <div className="empty-copy">
-            <p className="eyebrow">Atelier du jour</p>
-            <h1 id="page-title" className="hero-title">
-              Qu’allez-vous
-              <br />
-              forger aujourd’hui&nbsp;?
-            </h1>
-            <p className="hero-copy">
-              Préparez jusqu’à trois tâches. Ensuite, entrez dans une session où chaque mot vous
-              fait avancer.
-            </p>
-          </div>
-
-          <div className="paper-panel empty-card">
-            <span className="paper-number" aria-hidden="true">
-              01
-            </span>
-            <div>
-              <p className="eyebrow">Première pièce</p>
-              <h2>Votre établi est vide.</h2>
-              <p>Posez une tâche concrète. Une bonne tâche commence par un verbe d’action.</p>
-            </div>
-            <KeyButton variant="primary">Ajouter une tâche</KeyButton>
-          </div>
-        </section>
+        <PreparationView state={state} updateState={setState} />
       ) : (
         <section className="empty-layout" aria-labelledby="projects-title">
           <div className="empty-copy">

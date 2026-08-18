@@ -89,6 +89,7 @@ La procédure complète et les réglages exacts sont documentés dans [`docs/dep
 | [`docs/architecture/stack.md`](docs/architecture/stack.md) | Stack, stockage local et stratégie de qualité |
 | [`docs/architecture/local-data.md`](docs/architecture/local-data.md) | Version du stockage, migrations, import et export |
 | [`docs/product/data-and-locking.md`](docs/product/data-and-locking.md) | Données, confidentialité et limites du verrouillage web |
+| [`docs/quality/beta-readiness.md`](docs/quality/beta-readiness.md) | Contrôles de qualité réussis et validations bêta encore ouvertes |
 | [`docs/deployment/cloudflare-workers.md`](docs/deployment/cloudflare-workers.md) | Configuration et vérification du déploiement Cloudflare Workers |
 
 L’application est développée avec React, TypeScript et Vite. Le MVP reste local-first : aucune création de compte n’est nécessaire pour écrire.

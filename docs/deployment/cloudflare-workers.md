@@ -20,7 +20,7 @@ Chaque push sur `main` déclenche automatiquement un nouveau build et un nouveau
 
 ## Adresse publique
 
-Aucun nom de domaine acheté n’est nécessaire. Cloudflare attribue une adresse en `*.workers.dev`. Un domaine personnel pourra être relié plus tard sans modifier l’application.
+Aucun nom de domaine acheté n’est nécessaire. La production est disponible sur `https://laforge.lfos.workers.dev/`. Un domaine personnel pourra être relié plus tard sans modifier l’application.
 
 ## Fichiers de déploiement
 
@@ -39,3 +39,15 @@ Vite copie le fichier public dans `dist` pendant le build. Aucune règle `_redir
 6. Ouvrir une route inexistante et confirmer que l’application répond sans erreur 404.
 
 La persistance reste locale au navigateur : un autre appareil ou un autre navigateur ne retrouve pas encore les textes du MVP.
+
+## Retour arrière
+
+Chaque déploiement Cloudflare crée une version distincte du Worker. Si un déploiement introduit une régression :
+
+1. Ouvrir **Workers & Pages**, sélectionner `laforge`, puis **Deployments**.
+2. Repérer la dernière version qui a passé le parcours de vérification ci-dessus.
+3. Ouvrir le menu à trois points de cette version et choisir **Rollback**.
+4. Confirmer que cette version reçoit de nouveau 100 % du trafic.
+5. Rejouer le parcours critique sur `https://laforge.lfos.workers.dev/` avant de corriger `main`.
+
+Le même retour arrière peut être lancé en terminal avec `npx wrangler rollback`, mais le tableau de bord reste la procédure privilégiée afin de sélectionner explicitement la version connue comme stable. La procédure officielle Cloudflare est décrite dans [Rollbacks](https://developers.cloudflare.com/workers/versions-and-deployments/rollbacks/).

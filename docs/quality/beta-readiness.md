@@ -12,6 +12,7 @@
 | Taille du build | JavaScript 75,37 kB gzip ; CSS 8,05 kB gzip |
 | Audit npm, production et développement | 0 vulnérabilité connue |
 | Recherche de secrets et fichiers `.env` suivis | aucun résultat |
+| Déploiement public | HTTPS, fallback SPA et en-têtes de sécurité vérifiés |
 
 La commande reproductible est `npm run check`. L’audit des dépendances utilise `npm audit`.
 
@@ -33,6 +34,8 @@ Restent à valider avant de déclarer l’audit terminé : un parcours réel ave
 
 Le manifeste fournit des icônes standard et maskable, un démarrage à la racine et le mode `standalone`. Le service worker met en cache la coquille applicative, actualise la navigation quand le réseau répond et retombe sur la dernière page d’accueil conservée en cas d’échec réseau.
 
+Le manifeste est servi en production avec le type `application/manifest+json`. Le parcours public vérifié couvre l’onboarding, la création d’une tâche, le lancement d’un sprint, la frappe, la sauvegarde locale, la sortie anticipée et le bilan final.
+
 Une installation réelle et un redémarrage en mode avion restent à rejouer sur iOS, Android et un navigateur de bureau après chaque modification du service worker ou des icônes.
 
 ## Sécurité et confidentialité
@@ -48,4 +51,4 @@ Une installation réelle et un redémarrage en mode avion restent à rejouer sur
 - automatiser un parcours de bout en bout dans un vrai navigateur ;
 - mesurer le démarrage et la frappe sur un téléphone ou ordinateur modeste ;
 - valider l’installation et le hors-ligne sur les trois familles d’appareils ;
-- tester le parcours public après le dernier déploiement et conserver l’identifiant de la version stable.
+- conserver l’identifiant Cloudflare de chaque version déclarée stable.

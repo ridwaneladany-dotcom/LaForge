@@ -1,6 +1,38 @@
 .header-actions {
   display: flex;
+  align-items: center;
   justify-self: end;
+  gap: 0.9rem;
+}
+
+.save-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--ink-muted);
+  font-family: var(--font-typewriter);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.save-state i {
+  width: 0.48rem;
+  height: 0.48rem;
+  border: 1px solid currentColor;
+  background: var(--success);
+}
+
+.save-state[data-status='saving'] i {
+  background: var(--ember);
+}
+
+.save-state[data-status='error'] {
+  color: var(--ember-deep);
+}
+
+.save-state[data-status='error'] i {
+  background: currentColor;
 }
 
 .install-key {
@@ -47,6 +79,11 @@
 }
 
 @media (max-width: 760px) {
+  .save-state {
+    max-width: 5.5rem;
+    font-size: 0.56rem;
+  }
+
   .install-key {
     padding-inline: 0.85rem;
   }

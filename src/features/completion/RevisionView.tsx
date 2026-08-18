@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 
 import { KeyButton } from '../../components/KeyButton';
+import type { SaveStatus } from '../../app/usePersistentAppState';
 import type { WritingDraft, WritingTask } from '../../domain/models';
 import { countWords } from '../sprint/wordCount';
 
@@ -9,6 +10,7 @@ type RevisionViewProps = {
   onBack: () => void;
   onCompleteTask: () => void;
   onContentChange: (content: string) => void;
+  saveStatus: SaveStatus;
   task: WritingTask;
 };
 
@@ -17,6 +19,7 @@ export function RevisionView({
   onBack,
   onCompleteTask,
   onContentChange,
+  saveStatus: persistenceStatus,
   task,
 }: RevisionViewProps) {
   const contentRef = useRef(draft.content);
@@ -26,7 +29,7 @@ export function RevisionView({
   const [markerCount, setMarkerCount] = useState(
     () => draft.content.match(/\[À REVOIR\]/gu)?.length ?? 0,
   );
-  const [saveStatus, setSaveStatus] = useState<'saved' | 'saving'>('saved');
+  const [editSaveStatus, setEditSaveStatus] = useState<'saved' | 'saving'>('saved');
 
   useEffect(() => {
     onContentChangeRef.current = onContentChange;
@@ -45,11 +48,11 @@ export function RevisionView({
     contentRef.current = content;
     setWordCount(countWords(content));
     setMarkerCount(content.match(/\[À REVOIR\]/gu)?.length ?? 0);
-    setSaveStatus('saving');
+    setEditSaveStatus('saving');
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
       onContentChangeRef.current(content);
-      setSaveStatus('saved');
+      setEditSaveStatus('saved');
     }, 300);
   }
 
@@ -86,7 +89,11 @@ export function RevisionView({
             {markerCount > 0 ? `${markerCount} marqueur(s) à revoir` : 'aucun marqueur restant'}
           </span>
           <span aria-live="polite">
-            {saveStatus === 'saving' ? 'sauvegarde…' : 'enregistré localement'}
+            {persistenceStatus === 'error'
+              ? 'sauvegarde impossible'
+              : editSaveStatus === 'saving' || persistenceStatus === 'saving'
+                ? 'sauvegarde…'
+                : 'enregistré localement'}
           </span>
         </footer>
       </section>

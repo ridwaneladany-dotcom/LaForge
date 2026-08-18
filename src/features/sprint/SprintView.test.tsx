@@ -58,6 +58,7 @@ describe('SprintView', () => {
         onExit={vi.fn()}
         onFinishEarly={vi.fn()}
         onSoundToggle={vi.fn()}
+        saveStatus="saved"
         soundEnabled={false}
         sprint={sprint}
         task={task}

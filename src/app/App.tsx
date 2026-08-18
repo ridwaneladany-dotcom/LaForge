@@ -27,7 +27,7 @@ function createId() {
 
 export function App() {
   const [activeView, setActiveView] = useState<AppView>('today');
-  const [state, setState] = usePersistentAppState();
+  const [state, setState, saveStatus] = usePersistentAppState();
   const [viewedSprintId, setViewedSprintId] = useState<string | null>(null);
   const [revisionDraftId, setRevisionDraftId] = useState<string | null>(null);
 
@@ -57,6 +57,7 @@ export function App() {
       return (
         <RevisionView
           draft={revisionDraft}
+          saveStatus={saveStatus}
           task={task}
           onBack={() => setRevisionDraftId(null)}
           onContentChange={(content) =>
@@ -131,6 +132,7 @@ export function App() {
           onComplete={finishSprint}
           onFinishEarly={finishSprint}
           soundEnabled={state.preferences.soundEnabled}
+          saveStatus={saveStatus}
           onSoundToggle={(soundEnabled) =>
             setState((currentState) => ({
               ...currentState,
@@ -161,7 +163,7 @@ export function App() {
   }
 
   return (
-    <AppShell activeView={activeView} onViewChange={setActiveView}>
+    <AppShell activeView={activeView} onViewChange={setActiveView} saveStatus={saveStatus}>
       {activeView === 'today' ? (
         <PreparationView state={state} updateState={setState} onLaunch={launchSprint} />
       ) : (

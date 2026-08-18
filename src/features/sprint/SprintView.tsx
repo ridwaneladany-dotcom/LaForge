@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { KeyButton } from '../../components/KeyButton';
 import type { WritingDraft, WritingSprint, WritingTask } from '../../domain/models';
+import type { SaveStatus } from '../../app/usePersistentAppState';
 import { ForwardEditor } from './ForwardEditor';
 import { playClockTick, startTimeUpAlarm, unlockClockAudio } from './clockAudio';
 import { TimeUpOverlay } from './TimeUpOverlay';
@@ -16,6 +17,7 @@ type SprintViewProps = {
   onExit: (content: string) => void;
   onFinishEarly: (content: string) => void;
   onSoundToggle: (enabled: boolean) => void;
+  saveStatus: SaveStatus;
   soundEnabled: boolean;
   sprint: WritingSprint;
   task: WritingTask;
@@ -34,6 +36,7 @@ export function SprintView({
   onExit,
   onFinishEarly,
   onSoundToggle,
+  saveStatus,
   soundEnabled,
   sprint,
   task,
@@ -157,7 +160,13 @@ export function SprintView({
           <footer className="writing-stats">
             <span>{wordCount} mots</span>
             <span>{sprint.wordGoal ? `objectif ${sprint.wordGoal}` : 'sans objectif de mots'}</span>
-            <span>sauvegarde locale</span>
+            <span data-save-status={saveStatus}>
+              {saveStatus === 'error'
+                ? 'sauvegarde impossible'
+                : saveStatus === 'saving'
+                  ? 'sauvegarde…'
+                  : 'enregistré localement'}
+            </span>
           </footer>
         </section>
       </div>

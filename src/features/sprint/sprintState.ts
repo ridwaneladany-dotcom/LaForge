@@ -1,4 +1,5 @@
 import type { AppState, WritingDraft, WritingSprint } from '../../domain/models';
+import { countWords } from './wordCount';
 
 export function startSprint(
   state: AppState,
@@ -14,6 +15,8 @@ export function startSprint(
   const draft: WritingDraft = {
     id: `draft-${id}`,
     taskId,
+    kind: 'sprint',
+    sourceDraftId: null,
     content: task.seed,
     createdAt: startedAt,
     updatedAt: startedAt,
@@ -26,6 +29,7 @@ export function startSprint(
     taskId,
     draftId: draft.id,
     durationMinutes: task.durationMinutes,
+    initialWordCount: countWords(task.seed),
     wordGoal: task.wordGoal,
     startedAt,
     plannedEndAt,
@@ -56,6 +60,9 @@ function closeSprint(
   status: 'completed' | 'exited',
   timestamp: string,
 ): AppState {
+  const sprint = state.sprints.find((candidate) => candidate.id === sprintId);
+  if (!sprint || sprint.status !== 'running') return state;
+
   return {
     ...state,
     sprints: state.sprints.map((sprint) =>
@@ -65,7 +72,32 @@ function closeSprint(
 }
 
 export function completeSprint(state: AppState, sprintId: string, timestamp: string): AppState {
-  return closeSprint(state, sprintId, 'completed', timestamp);
+  const sprint = state.sprints.find((candidate) => candidate.id === sprintId);
+  const draft = state.drafts.find((candidate) => candidate.id === sprint?.draftId);
+  if (!sprint || !draft || sprint.status !== 'running') return state;
+
+  const completedState = closeSprint(state, sprintId, 'completed', timestamp);
+  const date = timestamp.slice(0, 10);
+  const minutesWritten = Math.max(
+    1,
+    Math.ceil((new Date(timestamp).getTime() - new Date(sprint.startedAt).getTime()) / 60_000),
+  );
+  const wordsWritten = Math.max(0, countWords(draft.content) - (sprint.initialWordCount ?? 0));
+  const existingDay = completedState.practice.find((day) => day.date === date);
+  const practice = existingDay
+    ? completedState.practice.map((day) =>
+        day.date === date
+          ? {
+              ...day,
+              completedSprints: day.completedSprints + 1,
+              minutesWritten: day.minutesWritten + minutesWritten,
+              wordsWritten: day.wordsWritten + wordsWritten,
+            }
+          : day,
+      )
+    : [...completedState.practice, { date, completedSprints: 1, minutesWritten, wordsWritten }];
+
+  return { ...completedState, practice };
 }
 
 export function exitSprint(state: AppState, sprintId: string, timestamp: string): AppState {

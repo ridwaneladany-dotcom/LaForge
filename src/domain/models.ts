@@ -34,6 +34,8 @@ export interface WritingTask {
 export interface WritingDraft {
   id: string;
   taskId: string;
+  kind: 'sprint' | 'revision';
+  sourceDraftId: string | null;
   content: string;
   createdAt: string;
   updatedAt: string;
@@ -44,6 +46,7 @@ export interface WritingSprint {
   taskId: string;
   draftId: string;
   durationMinutes: SprintDuration;
+  initialWordCount: number;
   wordGoal: number | null;
   startedAt: string;
   plannedEndAt: string;

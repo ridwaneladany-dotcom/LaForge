@@ -1,11 +1,12 @@
-const CACHE_NAME = 'laforge-shell-v1';
+const CACHE_NAME = 'laforge-shell-v2';
 const APP_SHELL = [
   '/',
   '/manifest.webmanifest',
   '/favicon.svg',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
-  '/apple-touch-icon.png',
+  '/icons/icon-192-v2.png',
+  '/icons/icon-512-v2.png',
+  '/icons/icon-maskable-512-v2.png',
+  '/apple-touch-icon-v2.png',
 ];
 
 self.addEventListener('install', (event) => {

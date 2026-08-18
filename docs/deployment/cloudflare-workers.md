@@ -26,9 +26,8 @@ Aucun nom de domaine acheté n’est nécessaire. Cloudflare attribue une adress
 
 - `wrangler.jsonc` configure le nom du Worker, le dossier statique et le routage SPA.
 - `public/_headers` ajoute des en-têtes de sécurité et met en cache les ressources versionnées.
-- `public/_redirects` conserve une redirection SPA explicite pour les plateformes qui la prennent en charge.
 
-Vite copie les deux fichiers publics dans `dist` pendant le build.
+Vite copie le fichier public dans `dist` pendant le build. Aucune règle `_redirects` n’est ajoutée : elle ferait doublon avec `not_found_handling` et provoquerait une boucle de redirection sur Workers.
 
 ## Vérification après déploiement
 

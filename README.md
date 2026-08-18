@@ -1,49 +1,71 @@
-# LaForge
+<p align="center">
+  <img src="assets/laforge-mark.svg" width="112" height="112" alt="Logo LaForge" />
+</p>
 
-LaForge est une application web d'écriture focalisée conçue pour transformer une intention en premier jet.
+<h1 align="center">LaForge</h1>
 
-L'utilisateur prépare jusqu'à trois résultats, choisit celui qu'il veut produire, puis entre dans un sprint d'écriture sans retour en arrière. Pendant ce sprint, l'objectif n'est pas de corriger : il est d'avancer.
+<p align="center">
+  <strong>Transforme une intention en matière.</strong><br />
+  Une application d’écriture focalisée pour avancer avant de corriger.
+</p>
 
-## Ambition
+<p align="center">
+  <img src="https://img.shields.io/badge/statut-phase%200-d95632?style=flat-square" alt="Statut : phase 0" />
+  <img src="https://img.shields.io/badge/licence-MIT-292521?style=flat-square" alt="Licence MIT" />
+  <img src="https://img.shields.io/badge/open%20source-oui-567a5e?style=flat-square" alt="Projet open source" />
+</p>
 
-LaForge veut rendre le démarrage plus simple, l'élan plus naturel et l'achèvement plus gratifiant. Son expérience doit être fortement engageante sans recourir à des mécanismes culpabilisants ou opaques.
+---
 
-Le projet est le premier projet open source de **Ridwane Ladany**. Il est actuellement dans sa phase de préparation : aucun choix technique ou développement applicatif ne commencera avant la validation de la phase 0.
+LaForge aide à franchir le moment le plus difficile d’un projet d’écriture : commencer et continuer malgré l’envie de corriger chaque phrase.
 
-## Principes du MVP
+L’utilisateur prépare jusqu’à trois résultats concrets, en choisit un, puis entre dans un sprint où le texte avance uniquement vers l’avant. La révision complète s’ouvre à la fin, une fois qu’il existe enfin de la matière à façonner.
 
-- Trois tâches maximum, formulées comme des résultats concrets.
-- Un sprint associé à une seule tâche active.
-- Une écriture uniquement vers l'avant pendant le sprint.
-- Une sauvegarde fiable même après un rechargement.
-- Un déverrouillage complet pour la révision à la fin.
-- Une progression motivante qui respecte le contrôle de l'utilisateur.
+## L’expérience
 
-## Feuille de route
+1. **Préparer** — formuler trois résultats maximum et choisir la priorité du moment.
+2. **S’engager** — sélectionner une durée et entrer dans un sprint sans distraction.
+3. **Avancer** — écrire vers l’avant, avec une sauvegarde continue et une sortie explicite.
+4. **Façonner** — retrouver un éditeur libre, mesurer la matière produite et poursuivre le projet.
 
-La feuille de route détaillée se trouve dans [`todo.md`](todo.md). La phase 0 ne peut démarrer qu'après le premier push et l'accord explicite du propriétaire du projet.
+## Les principes du produit
 
-## Aperçu de la phase 0
+- **L’élan avant la perfection** — le premier jet sert à créer, pas à juger.
+- **Une seule attention à la fois** — une tâche active, les autres restent en attente.
+- **Une contrainte réversible** — sortir ne détruit jamais le texte et la révision reste toujours disponible.
+- **Une progression sans culpabilité** — les retours visuels valorisent le travail produit, sans dark pattern.
+- **Des données sous contrôle** — le fonctionnement essentiel doit rester fiable, exportable et compréhensible.
 
-Le cadrage produit, la boucle d'engagement et les wireflows se trouvent dans [`docs/phase-0`](docs/phase-0). Un prototype interactif permet de parcourir la préparation, le sprint verrouillé, la sortie volontaire, le bilan et la révision.
+## État du projet
 
-```powershell
-cd docs/phase-0/prototype
-python -m http.server 41763 --bind 127.0.0.1
-```
+LaForge est actuellement en **phase 0 : cadrage produit et expérience**. Le parcours principal, la boucle d’engagement, les wireflows et un prototype interactif ont été matérialisés. Le développement de l’application commencera après validation des décisions produit structurantes.
 
-Ouvrir ensuite <http://127.0.0.1:41763/>. Ce prototype ne préjuge pas de la future stack applicative.
+Le prototype documente déjà :
 
-## Développement
+- l’onboarding de première visite ;
+- la préparation de trois résultats maximum ;
+- le sprint d’écriture vers l’avant ;
+- la sortie volontaire sans perte du texte ;
+- le bilan et le passage en révision libre.
 
-Le dépôt contient des skills de conception et d'ingénierie dans [`.agents/skills`](.agents/skills). Ils sont versionnés avec le projet pour garantir un environnement de travail reproductible.
+## Parcourir le dépôt
 
-La stack applicative sera choisie au début de la phase 1 à partir des besoins produit validés. Aucun framework n'est imposé à ce stade.
+| Ressource | Contenu |
+| --- | --- |
+| [`todo.md`](todo.md) | Feuille de route complète, de la fondation à la bêta |
+| [`docs/phase-0/product-brief.md`](docs/phase-0/product-brief.md) | Cible, promesse, vocabulaire et limites du MVP |
+| [`docs/phase-0/engagement-and-metrics.md`](docs/phase-0/engagement-and-metrics.md) | Boucle d’engagement éthique et indicateurs |
+| [`docs/phase-0/experience-spec.md`](docs/phase-0/experience-spec.md) | Parcours, wireflows et critères d’acceptation |
+| [`docs/phase-0/prototype`](docs/phase-0/prototype) | Prototype interactif autonome de la phase 0 |
 
-## Contributions
+La stack applicative sera choisie au début de la phase 1 à partir des besoins validés. Aucun framework n’est imposé à ce stade.
 
-Le projet est public dès sa fondation, mais il n'accepte pas encore de contributions externes. Les règles de contribution seront précisées avant l'ouverture de la première version bêta.
+## Open source
+
+LaForge est le premier projet open source de **Ridwane Ladany**. Le dépôt est public dès sa fondation pour rendre visibles les décisions produit et techniques au fil du développement.
+
+Les contributions externes ne sont pas encore ouvertes. Les règles de contribution et de gouvernance seront publiées avant la première bêta.
 
 ## Licence
 
-LaForge est distribué sous licence MIT. Les composants tiers intégrés au dépôt conservent leurs auteurs et licences respectifs ; voir [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+LaForge est distribué sous [licence MIT](LICENSE). Les composants tiers conservent leurs auteurs et licences respectifs ; voir [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).

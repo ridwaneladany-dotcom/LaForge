@@ -13,12 +13,13 @@
 
 ## Pré-phase — Préparer le dépôt
 
-- [ ] Choisir l'une des trois propositions de configuration du dépôt.
-- [ ] Initialiser ou rattacher le dépôt local au dépôt GitHub `ridwaneladany-dotcom/LaForge`.
-- [ ] Installer les skills tiers demandés dans le périmètre local retenu.
-- [ ] Ajouter les fichiers de base retenus (`README.md`, règles Git, consignes agent et attribution des dépendances tierces).
-- [ ] Vérifier l'état Git, le contenu suivi et l'absence de secrets.
-- [ ] Créer le commit initial et effectuer le premier push.
+- [x] Choisir l'une des trois propositions de configuration du dépôt.
+- [x] Initialiser ou rattacher le dépôt local au dépôt GitHub `ridwaneladany-dotcom/LaForge`.
+- [x] Installer les skills tiers demandés dans le périmètre local retenu.
+- [x] Ajouter les fichiers de base retenus (`README.md`, règles Git, consignes agent et attribution des dépendances tierces).
+- [x] Vérifier l'état Git, le contenu suivi et l'absence de secrets.
+- [x] Créer les commits atomiques de préparation.
+- [ ] Effectuer le premier push.
 - [ ] Attendre l'aval explicite avant de commencer la phase 0.
 
 ## Phase 0 — Cadrage produit et expérience
@@ -146,4 +147,3 @@ Objectif : confronter la promesse à de vrais usages avant d'élargir le produit
 - Bibliothèque de modèles de tâches et de projets.
 - Mode desktop natif et blocage système renforcé.
 - Monétisation, équipes et fonctionnalités professionnelles.
-

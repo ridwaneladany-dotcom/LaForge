@@ -177,7 +177,9 @@ L'accent braise ne colore jamais de grandes surfaces pendant l'écriture. Il doi
 
 ### Matière et profondeur
 
-- Surfaces opaques pour les zones de lecture.
+- La zone d'écriture ressemble à une feuille claire engagée dans un outil mécanique, jamais à un champ de formulaire numérique.
+- L'encre, le papier ivoire, les ombres de feuilles superposées et la typographie monospacée portent la sensation analogique.
+- Surfaces opaques pour les zones de lecture et texture de papier extrêmement discrète sur le fond.
 - Translucidité seulement pour le chrome flottant et la feuille de sortie.
 - Contrôles identifiables par une forme angulaire, un bord, un reflet supérieur et une ombre noire de contact clairement visible.
 - Surfaces principales plus profondes que les contrôles qu'elles contiennent, sans empiler des cartes décoratives.

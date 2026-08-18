@@ -16,6 +16,7 @@ Le prototype a été servi avec un serveur statique local et contrôlé dans le 
 | Lancement immédiat d'un sprint | Réussite |
 | Focus automatique dans l'éditeur | Réussite |
 | Saisie exacte de 125 caractères avec accents, `œ`, chiffres et ponctuation | Réussite |
+| Saisie exacte après intégration de la feuille et du bâti de machine à écrire | Réussite |
 | Blocage de la flèche gauche et du retour arrière | Réussite |
 | Blocage de l'annulation clavier | Réussite |
 | Conservation du texte après rechargement | Réussite |

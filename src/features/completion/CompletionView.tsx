@@ -1,6 +1,7 @@
 import forgeMark from '../../../assets/laforge-mark.svg';
 import { KeyButton } from '../../components/KeyButton';
 import type { PracticeDay, WritingDraft, WritingSprint, WritingTask } from '../../domain/models';
+import { downloadDraft } from '../projects/projectFiles';
 import { getCurrentStreak, getSprintMetrics } from './completionState';
 
 type CompletionViewProps = {
@@ -126,6 +127,16 @@ export function CompletionView({
             <button type="button" onClick={onReplan}>
               <strong>La garder à l’atelier</strong>
               <span>La reprendre lors d’un prochain sprint</span>
+            </button>
+          </div>
+
+          <div className="draft-export-actions" aria-label="Exporter ce jet">
+            <span>Emporter ce jet</span>
+            <button type="button" onClick={() => downloadDraft(task, draft, 'text')}>
+              Texte brut
+            </button>
+            <button type="button" onClick={() => downloadDraft(task, draft, 'markdown')}>
+              Markdown
             </button>
           </div>
         </aside>

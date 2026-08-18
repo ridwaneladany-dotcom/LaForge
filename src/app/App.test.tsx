@@ -99,4 +99,19 @@ describe('App', () => {
 
     expect(screen.getByRole('heading', { name: 'Vos projets.' })).toBeInTheDocument();
   });
+
+  it('creates a project and opens its independent workshop', async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(screen.getByRole('button', { name: 'Projets' }));
+    await user.type(screen.getByRole('textbox', { name: 'Nouveau projet' }), 'Mémoire de master');
+    await user.click(screen.getByRole('button', { name: 'Créer le projet' }));
+
+    expect(screen.getByDisplayValue('Mémoire de master')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Reprendre ce projet' }));
+    expect(screen.getByRole('heading', { name: 'Préparez vos pièces.' })).toBeInTheDocument();
+    expect(screen.getByText('Atelier du jour · Mémoire de master')).toBeInTheDocument();
+  });
 });

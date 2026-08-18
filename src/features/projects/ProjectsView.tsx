@@ -1,9 +1,17 @@
-import { useId, useState, type FormEvent } from 'react';
+import { useId, useRef, useState, type ChangeEvent, type FormEvent } from 'react';
 
 import { KeyButton } from '../../components/KeyButton';
-import type { AppState } from '../../domain/models';
+import { APP_STORAGE_KEY } from '../../data/localStore';
+import { createInitialState, type AppState } from '../../domain/models';
+import {
+  downloadBackup,
+  downloadProject,
+  importTextIntoProject,
+  type TextExportFormat,
+} from './projectFiles';
 import {
   createProject,
+  getActiveProject,
   getProjectSummaries,
   MAX_PROJECT_NAME_LENGTH,
   normalizeProjectName,
@@ -30,11 +38,13 @@ function formatProjectDate(timestamp: string) {
 function ProjectCard({
   active,
   onOpen,
+  onExport,
   summary,
   updateState,
 }: {
   active: boolean;
   onOpen: () => void;
+  onExport: (format: TextExportFormat) => void;
   summary: ProjectSummary;
   updateState: ProjectsViewProps['updateState'];
 }) {
@@ -85,15 +95,25 @@ function ProjectCard({
           <dd>{summary.draftCount}</dd>
         </div>
       </dl>
-      <KeyButton
-        variant={active ? 'primary' : 'default'}
-        onClick={() => {
-          updateState((state) => selectProject(state, summary.project.id));
-          onOpen();
-        }}
-      >
-        {active ? 'Reprendre ce projet' : 'Ouvrir l’atelier'}
-      </KeyButton>
+      <div className="project-card-actions">
+        <KeyButton
+          variant={active ? 'primary' : 'default'}
+          onClick={() => {
+            updateState((state) => selectProject(state, summary.project.id));
+            onOpen();
+          }}
+        >
+          {active ? 'Reprendre ce projet' : 'Ouvrir l’atelier'}
+        </KeyButton>
+        <div aria-label={`Exporter ${summary.project.name}`}>
+          <button type="button" onClick={() => onExport('text')}>
+            TXT
+          </button>
+          <button type="button" onClick={() => onExport('markdown')}>
+            MD
+          </button>
+        </div>
+      </div>
     </article>
   );
 }
@@ -101,8 +121,12 @@ function ProjectCard({
 export function ProjectsView({ onOpenProject, state, updateState }: ProjectsViewProps) {
   const [name, setName] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [importStatus, setImportStatus] = useState<string | null>(null);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const projectNameId = useId();
+  const importInputRef = useRef<HTMLInputElement>(null);
   const summaries = getProjectSummaries(state);
+  const activeProject = getActiveProject(state);
 
   function handleCreateProject(event: FormEvent) {
     event.preventDefault();
@@ -117,6 +141,34 @@ export function ProjectsView({ onOpenProject, state, updateState }: ProjectsView
     );
     setName('');
     setError(null);
+  }
+
+  async function handleImport(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    if (!file || !activeProject) return;
+    if (file.size > 2_000_000) {
+      setImportStatus('Ce fichier dépasse la limite locale de 2 Mo.');
+      return;
+    }
+
+    const content = await file.text();
+    if (!content.trim()) {
+      setImportStatus('Ce fichier ne contient aucun texte à importer.');
+      return;
+    }
+
+    updateState((currentState) =>
+      importTextIntoProject(
+        currentState,
+        activeProject.id,
+        file.name,
+        content,
+        createId(),
+        new Date().toISOString(),
+      ),
+    );
+    setImportStatus(`« ${file.name} » est conservé dans ${activeProject.name}.`);
   }
 
   return (
@@ -158,6 +210,7 @@ export function ProjectsView({ onOpenProject, state, updateState }: ProjectsView
               key={summary.project.id}
               active={summary.project.id === state.preferences.activeProjectId}
               onOpen={onOpenProject}
+              onExport={(format) => downloadProject(state, summary.project, format)}
               summary={summary}
               updateState={updateState}
             />
@@ -170,6 +223,70 @@ export function ProjectsView({ onOpenProject, state, updateState }: ProjectsView
           <p>Créez un projet pour regrouper ses tâches, ses sprints et ses textes forgés.</p>
         </div>
       )}
+
+      <section className="project-tools" aria-labelledby="project-tools-title">
+        <div>
+          <p className="eyebrow">Fichiers locaux</p>
+          <h2 id="project-tools-title">Emportez votre matière.</h2>
+          <p>
+            Les imports et exports restent sur cet appareil. Aucun texte n’est envoyé à LaForge.
+          </p>
+        </div>
+        <div className="project-tool-actions">
+          <input
+            ref={importInputRef}
+            hidden
+            type="file"
+            accept=".txt,.md,.markdown,text/plain,text/markdown"
+            onChange={(event) => void handleImport(event)}
+          />
+          <KeyButton disabled={!activeProject} onClick={() => importInputRef.current?.click()}>
+            Importer dans le projet actif
+          </KeyButton>
+          <KeyButton onClick={() => downloadBackup(state)}>
+            Sauvegarder toutes les données
+          </KeyButton>
+          <p className="import-status" role="status" aria-live="polite">
+            {importStatus}
+          </p>
+        </div>
+      </section>
+
+      <section className="data-vault paper-panel" aria-labelledby="data-vault-title">
+        <div>
+          <p className="eyebrow">Maîtrise des données</p>
+          <h2 id="data-vault-title">Vos textes restent les vôtres.</h2>
+          <p>
+            La sauvegarde JSON contient projets, tâches, jets et préférences. La suppression efface
+            tout le contenu LaForge de ce navigateur.
+          </p>
+        </div>
+        {confirmDelete ? (
+          <div className="delete-confirm" role="alert">
+            <strong>Cette action est définitive sur cet appareil.</strong>
+            <div>
+              <KeyButton onClick={() => setConfirmDelete(false)}>Conserver mes données</KeyButton>
+              <KeyButton
+                variant="primary"
+                onClick={() => {
+                  window.localStorage.removeItem(APP_STORAGE_KEY);
+                  updateState(() => createInitialState());
+                }}
+              >
+                Effacer définitivement
+              </KeyButton>
+            </div>
+          </div>
+        ) : (
+          <button
+            className="delete-data-button"
+            type="button"
+            onClick={() => setConfirmDelete(true)}
+          >
+            Supprimer toutes les données
+          </button>
+        )}
+      </section>
     </section>
   );
 }

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { KeyButton } from '../../components/KeyButton';
 import type { SaveStatus } from '../../app/usePersistentAppState';
 import type { WritingDraft, WritingTask } from '../../domain/models';
+import { downloadDraft } from '../projects/projectFiles';
 import { countWords } from '../sprint/wordCount';
 
 type RevisionViewProps = {
@@ -73,8 +74,18 @@ export function RevisionView({
 
       <section className="revision-desk" aria-label="Révision du jet">
         <div className="revision-note">
-          <span>Original préservé</span>
-          <p>Vous pouvez maintenant déplacer, supprimer et réécrire librement.</p>
+          <div>
+            <span>Original préservé</span>
+            <p>Vous pouvez maintenant déplacer, supprimer et réécrire librement.</p>
+          </div>
+          <div className="revision-export" aria-label="Exporter cette révision">
+            <button type="button" onClick={() => downloadDraft(task, draft, 'text')}>
+              TXT
+            </button>
+            <button type="button" onClick={() => downloadDraft(task, draft, 'markdown')}>
+              MD
+            </button>
+          </div>
         </div>
         <textarea
           className="revision-editor"

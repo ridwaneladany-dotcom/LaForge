@@ -235,6 +235,45 @@
   gap: 0.7rem;
 }
 
+.draft-export-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.draft-export-actions span {
+  margin-right: auto;
+  color: var(--ink-faint);
+  font-family: var(--font-typewriter);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.draft-export-actions button,
+.revision-export button {
+  min-height: 2.2rem;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--edge);
+  border-radius: 0;
+  color: var(--ink-muted);
+  background: var(--paper-aged);
+  box-shadow: 0 2px 0 #bbae9b;
+  cursor: pointer;
+  font-family: var(--font-typewriter);
+  font-size: 0.67rem;
+  font-weight: 700;
+}
+
+.draft-export-actions button:active,
+.revision-export button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #bbae9b;
+}
+
 .completion-task-actions button {
   display: grid;
   gap: 0.25rem;
@@ -338,6 +377,16 @@
   padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--line);
   background: var(--paper-aged);
+}
+
+.revision-note > div:first-child {
+  min-width: 0;
+}
+
+.revision-export {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
 }
 
 .revision-note span {

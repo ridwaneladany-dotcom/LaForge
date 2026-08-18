@@ -73,6 +73,39 @@
   padding: clamp(1.5rem, 3vw, 2.5rem);
 }
 
+.project-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.project-card-actions > div {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.project-card-actions > div button,
+.delete-data-button {
+  min-height: 2.2rem;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--edge);
+  border-radius: 0;
+  color: var(--ink-muted);
+  background: var(--paper-aged);
+  box-shadow: 0 2px 0 #bbae9b;
+  cursor: pointer;
+  font-family: var(--font-typewriter);
+  font-size: 0.67rem;
+  font-weight: 700;
+}
+
+.project-card-actions > div button:active,
+.delete-data-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #bbae9b;
+}
+
 .project-card[data-active='true'] {
   border-top: 4px solid var(--ember);
 }
@@ -142,13 +175,97 @@
   line-height: 1.65;
 }
 
+.project-tools,
+.data-vault {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.75fr);
+  align-items: center;
+  gap: clamp(2rem, 7vw, 7rem);
+}
+
+.project-tools h2,
+.data-vault h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 4.4rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+}
+
+.project-tools > div > p:not(.eyebrow),
+.data-vault > div > p:not(.eyebrow) {
+  max-width: 39rem;
+  color: var(--ink-muted);
+  line-height: 1.65;
+}
+
+.project-tool-actions {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.project-tool-actions .key-button {
+  width: 100%;
+}
+
+.import-status {
+  min-height: 2.6rem;
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.data-vault {
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.delete-data-button {
+  justify-self: end;
+  color: var(--ember-deep);
+}
+
+.delete-confirm {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid var(--ember-deep);
+  background: var(--paper-aged);
+}
+
+.delete-confirm strong {
+  font-family: var(--font-typewriter);
+  font-size: 0.78rem;
+}
+
+.delete-confirm > div {
+  display: grid;
+  gap: 0.8rem;
+}
+
 @media (max-width: 760px) {
   .projects-heading,
-  .project-grid {
+  .project-grid,
+  .project-tools,
+  .data-vault {
     grid-template-columns: 1fr;
   }
 
   .project-card-heading {
     display: grid;
+  }
+
+  .project-card-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .project-card-actions > div {
+    align-self: flex-end;
+  }
+
+  .delete-data-button {
+    justify-self: stretch;
   }
 }

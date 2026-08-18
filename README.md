@@ -52,7 +52,6 @@ Le prototype documente déjà :
 
 | Ressource | Contenu |
 | --- | --- |
-| [`todo.md`](todo.md) | Feuille de route complète, de la fondation à la bêta |
 | [`docs/phase-0/product-brief.md`](docs/phase-0/product-brief.md) | Cible, promesse, vocabulaire et limites du MVP |
 | [`docs/phase-0/engagement-and-metrics.md`](docs/phase-0/engagement-and-metrics.md) | Boucle d’engagement éthique et indicateurs |
 | [`docs/phase-0/experience-spec.md`](docs/phase-0/experience-spec.md) | Parcours, wireflows et critères d’acceptation |

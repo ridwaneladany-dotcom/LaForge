@@ -2,10 +2,10 @@
 
 ## Périmètre actuel
 
-- Lire `todo.md` avant toute modification substantielle.
+- Lire la documentation produit concernée avant toute modification substantielle.
 - Ne pas commencer la phase 0 sans l'accord explicite du propriétaire du projet.
 - Ne pas choisir de stack, générer d'application ou ajouter de dépendance applicative pendant la pré-phase.
-- Préserver le positionnement d'écriture focalisée et le périmètre MVP défini dans `todo.md`.
+- Préserver le positionnement d'écriture focalisée et le périmètre MVP défini dans `docs/phase-0`.
 
 ## Méthode de travail
 
@@ -33,4 +33,3 @@
 - Ne jamais collecter le contenu rédigé à des fins d'analytique.
 - Distinguer clairement engagement fort et dark patterns.
 - Traiter l'accessibilité, la récupération des écrits et la transparence de sortie comme des exigences fondamentales.
-

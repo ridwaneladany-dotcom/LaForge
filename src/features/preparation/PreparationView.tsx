@@ -19,6 +19,7 @@ import {
 } from './taskState';
 
 type PreparationViewProps = {
+  onLaunch: (taskId: string) => void;
   state: AppState;
   updateState: (updater: (state: AppState) => AppState) => void;
 };
@@ -110,7 +111,7 @@ function TaskCard({
   );
 }
 
-export function PreparationView({ state, updateState }: PreparationViewProps) {
+export function PreparationView({ onLaunch, state, updateState }: PreparationViewProps) {
   const [newTitle, setNewTitle] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [showReview, setShowReview] = useState(false);
@@ -165,11 +166,11 @@ export function PreparationView({ state, updateState }: PreparationViewProps) {
           )}
           <div className="review-actions">
             <KeyButton onClick={() => setShowReview(false)}>Ajuster</KeyButton>
-            <KeyButton variant="primary" disabled title="Disponible dans la phase sprint">
+            <KeyButton variant="primary" onClick={() => onLaunch(activeTask.id)}>
               Entrer dans la forge
             </KeyButton>
           </div>
-          <p className="phase-note">Le tunnel d’écriture arrive à la prochaine phase.</p>
+          <p className="phase-note">Votre texte sera sauvegardé localement pendant le sprint.</p>
         </div>
       </section>
     );

@@ -53,6 +53,25 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: 'Rédiger une scène' })).toBeInTheDocument();
   });
 
+  it('enters a forward-only sprint without dropping typed characters', async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.type(
+      screen.getByRole('textbox', { name: /Quelle pièce voulez-vous produire/ }),
+      'Rédiger une scène',
+    );
+    await user.click(screen.getByRole('button', { name: 'Ajouter' }));
+    await user.click(screen.getByRole('button', { name: 'Vérifier l’engagement' }));
+    await user.click(screen.getByRole('button', { name: 'Entrer dans la forge' }));
+
+    const editor = screen.getByRole('textbox', { name: 'Zone d’écriture du sprint' });
+    await user.type(editor, 'Chaque lettre reste.');
+    await user.keyboard('{Backspace}');
+
+    expect(editor).toHaveValue('Chaque lettre reste.');
+  });
+
   it('switches to the projects view', async () => {
     const user = userEvent.setup();
     render(<App />);

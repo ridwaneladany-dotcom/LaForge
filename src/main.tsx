@@ -7,6 +7,7 @@ import './styles/tokens.css';
 import './styles/global.css';
 import './styles/preparation.css';
 import './styles/onboarding.css';
+import './styles/sprint.css';
 
 const root = document.querySelector<HTMLDivElement>('#root');
 

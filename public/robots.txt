@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://laforge.ridwaneladany.workers.dev/sitemap.xml
+Sitemap: https://laforge.lfos.workers.dev/sitemap.xml

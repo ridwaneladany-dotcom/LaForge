@@ -23,11 +23,22 @@ Le projet est le premier projet open source de **Ridwane Ladany**. Il est actuel
 
 La feuille de route détaillée se trouve dans [`todo.md`](todo.md). La phase 0 ne peut démarrer qu'après le premier push et l'accord explicite du propriétaire du projet.
 
+## Aperçu de la phase 0
+
+Le cadrage produit, la boucle d'engagement et les wireflows se trouvent dans [`docs/phase-0`](docs/phase-0). Un prototype interactif permet de parcourir la préparation, le sprint verrouillé, la sortie volontaire, le bilan et la révision.
+
+```powershell
+cd docs/phase-0/prototype
+python -m http.server 41763 --bind 127.0.0.1
+```
+
+Ouvrir ensuite <http://127.0.0.1:41763/>. Ce prototype ne préjuge pas de la future stack applicative.
+
 ## Développement
 
 Le dépôt contient des skills de conception et d'ingénierie dans [`.agents/skills`](.agents/skills). Ils sont versionnés avec le projet pour garantir un environnement de travail reproductible.
 
-La stack applicative sera choisie pendant la phase 0 à partir des besoins produit validés. Aucun framework n'est imposé à ce stade.
+La stack applicative sera choisie au début de la phase 1 à partir des besoins produit validés. Aucun framework n'est imposé à ce stade.
 
 ## Contributions
 
@@ -36,4 +47,3 @@ Le projet est public dès sa fondation, mais il n'accepte pas encore de contribu
 ## Licence
 
 LaForge est distribué sous licence MIT. Les composants tiers intégrés au dépôt conservent leurs auteurs et licences respectifs ; voir [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
-

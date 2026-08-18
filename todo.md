@@ -1,6 +1,6 @@
 # LaForge — feuille de route de développement
 
-> Statut actuel : pré-phase de préparation du dépôt.
+> Statut actuel : phase 0 matérialisée et en attente de validation produit.
 >
 > Règle de démarrage : ne pas commencer la phase 0 avant le premier push et l'aval explicite du propriétaire du projet.
 
@@ -19,28 +19,28 @@
 - [x] Ajouter les fichiers de base retenus (`README.md`, règles Git, consignes agent et attribution des dépendances tierces).
 - [x] Vérifier l'état Git, le contenu suivi et l'absence de secrets.
 - [x] Créer les commits atomiques de préparation.
-- [ ] Effectuer le premier push.
-- [ ] Attendre l'aval explicite avant de commencer la phase 0.
+- [x] Effectuer le premier push.
+- [x] Attendre l'aval explicite avant de commencer la phase 0.
 
 ## Phase 0 — Cadrage produit et expérience
 
 Objectif : figer le problème, la promesse et la boucle comportementale avant de choisir l'architecture ou de produire l'interface finale.
 
-- [ ] Définir la cible primaire et ses situations d'usage prioritaires.
-- [ ] Rédiger la proposition de valeur en une phrase et les limites explicites du produit.
-- [ ] Définir le vocabulaire de LaForge : projet, tâche, jet, sprint, série et texte forgé.
-- [ ] Détailler le parcours complet : arrivée, préparation, engagement, sprint, sortie, révision et reprise.
-- [ ] Définir les règles des trois tâches maximum et les critères d'une tâche actionnable.
-- [ ] Concevoir la boucle d'engagement éthique : déclencheur, action, retour immédiat, récompense et investissement.
-- [ ] Choisir les indicateurs MVP : activation, premier sprint terminé, mots produits, retour à J1/J7 et taux d'abandon.
-- [ ] Réaliser les wireflows desktop et mobile des états critiques.
-- [ ] Définir la direction visuelle, les principes d'animation et le ton rédactionnel.
-- [ ] Rédiger les critères d'acceptation du MVP et la liste explicite des éléments hors périmètre.
+- [x] Définir la cible primaire et ses situations d'usage prioritaires.
+- [x] Rédiger la proposition de valeur en une phrase et les limites explicites du produit.
+- [x] Définir le vocabulaire de LaForge : projet, tâche, jet, sprint, série et texte forgé.
+- [x] Détailler le parcours complet : arrivée, préparation, engagement, sprint, sortie, révision et reprise.
+- [x] Définir les règles des trois tâches maximum et les critères d'une tâche actionnable.
+- [x] Concevoir la boucle d'engagement éthique : déclencheur, action, retour immédiat, récompense et investissement.
+- [x] Choisir les indicateurs MVP : activation, premier sprint terminé, mots produits, retour à J1/J7 et taux d'abandon.
+- [x] Réaliser les wireflows desktop et mobile des états critiques.
+- [x] Définir la direction visuelle, les principes d'animation et le ton rédactionnel.
+- [x] Rédiger les critères d'acceptation du MVP et la liste explicite des éléments hors périmètre.
 
 ### Validation de phase 0
 
-- [ ] Le parcours peut être expliqué et testé sans ambiguïté.
-- [ ] Chaque mécanisme d'engagement sert la production et respecte le contrôle de l'utilisateur.
+- [x] Le parcours peut être expliqué et testé sans ambiguïté.
+- [x] Chaque mécanisme d'engagement sert la production et respecte le contrôle de l'utilisateur.
 - [ ] Les décisions produit structurantes sont approuvées avant le développement.
 
 ## Phase 1 — Fondation technique

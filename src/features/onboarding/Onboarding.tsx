@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import forgeMark from '../../../assets/laforge-mark.svg';
 import { KeyButton } from '../../components/KeyButton';
+import { InstallAppButton } from '../install/InstallAppButton';
 
 type OnboardingProps = {
   onComplete: () => void;
@@ -12,22 +13,22 @@ const STEPS = [
     index: '01',
     eyebrow: 'Le principe',
     title: 'Un brouillon qui refuse de reculer.',
-    body: 'Pendant un sprint, LaForge vous pousse vers l’avant. Vous écrivez sans corriger le passé, pour enfin produire de la matière.',
-    note: 'Le texte se déverrouille entièrement à la fin.',
+    body: 'Choisissez une durée, puis écrivez sans Retour arrière ni Suppr. La contrainte porte uniquement sur le brouillon : elle protège votre élan, pas votre perfection.',
+    note: 'Vous pouvez sortir à tout moment. Votre texte reste sauvegardé.',
   },
   {
     index: '02',
     eyebrow: 'La préparation',
     title: 'Trois pièces. Jamais plus.',
-    body: 'Transformez votre intention en une courte file de tâches concrètes, choisissez la première, puis fixez un temps de chauffe.',
-    note: 'Moins de choix. Plus d’élan.',
+    body: 'Listez jusqu’à trois résultats concrets — une scène, une introduction, une synthèse — puis choisissez celui que vous allez réellement produire.',
+    note: 'Une pièce choisie. Une durée. Puis vous commencez.',
   },
   {
     index: '03',
-    eyebrow: 'Votre atelier',
-    title: 'Vos mots restent chez vous.',
-    body: 'Le MVP fonctionne sans compte. Vos tâches et vos textes sont conservés localement dans ce navigateur, sous votre contrôle.',
-    note: 'LaForge encourage. Elle ne culpabilise jamais.',
+    eyebrow: 'Le parcours',
+    title: 'Écrivez d’abord. Façonnez ensuite.',
+    body: 'À la sonnerie, le brouillon se déverrouille. Vous pouvez le réviser, prolonger le sprint ou marquer la tâche comme terminée.',
+    note: 'Sans compte : vos tâches et vos textes restent dans ce navigateur.',
   },
 ] as const;
 
@@ -43,9 +44,12 @@ export function Onboarding({ onComplete }: OnboardingProps) {
           <img src={forgeMark} alt="" />
           <span>LaForge</span>
         </div>
-        <button className="text-button" type="button" onClick={onComplete}>
-          Passer l’introduction
-        </button>
+        <div className="onboarding-header-actions">
+          <InstallAppButton />
+          <button className="text-button" type="button" onClick={onComplete}>
+            Passer l’introduction
+          </button>
+        </div>
       </header>
 
       <section className="onboarding-stage" aria-labelledby="onboarding-title">
@@ -73,10 +77,29 @@ export function Onboarding({ onComplete }: OnboardingProps) {
               </>
             )}
             {stepIndex === 2 && (
-              <>
-                <span className="local-mark">LOCAL</span>
-                <span>aucun compte requis</span>
-              </>
+              <ol className="onboarding-route">
+                <li>
+                  <i>01</i>
+                  <span>
+                    <strong>Préparer</strong>
+                    un résultat et une durée
+                  </span>
+                </li>
+                <li>
+                  <i>02</i>
+                  <span>
+                    <strong>Forger</strong>
+                    avancer sans effacer
+                  </span>
+                </li>
+                <li>
+                  <i>03</i>
+                  <span>
+                    <strong>Façonner</strong>
+                    réviser le texte librement
+                  </span>
+                </li>
+              </ol>
             )}
           </div>
           <p>{step.note}</p>
@@ -97,7 +120,7 @@ export function Onboarding({ onComplete }: OnboardingProps) {
             variant="primary"
             onClick={() => (isLastStep ? onComplete() : setStepIndex((current) => current + 1))}
           >
-            {isLastStep ? 'Entrer dans l’atelier' : 'Continuer'}
+            {isLastStep ? 'Préparer mon premier jet' : 'Continuer'}
           </KeyButton>
         </div>
       </footer>

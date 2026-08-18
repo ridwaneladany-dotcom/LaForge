@@ -17,6 +17,12 @@
   border-bottom: 1px solid var(--line);
 }
 
+.onboarding-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .text-button {
   padding: 0.4rem 0;
   border: 0;
@@ -114,14 +120,47 @@
   animation: caret-blink 900ms steps(1) infinite;
 }
 
-.local-mark {
-  justify-self: start;
-  padding: 0.8rem 1rem;
-  border: 2px solid var(--success);
-  color: var(--success);
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  transform: rotate(-2deg);
+.onboarding-route {
+  display: grid;
+  gap: 1.15rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.onboarding-route li {
+  display: grid;
+  grid-template-columns: 3.25rem 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+.onboarding-route li i {
+  width: 3.25rem;
+  height: 3.25rem;
+  font-size: 0.72rem;
+}
+
+.onboarding-route li:nth-child(2),
+.onboarding-route li:nth-child(3) {
+  margin-left: 0;
+}
+
+.onboarding-route li span {
+  display: grid;
+  gap: 0.2rem;
+  color: var(--ink-muted);
+  font-family: var(--font-ui);
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.onboarding-route strong {
+  color: var(--ink);
+  font-family: var(--font-typewriter);
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .onboarding-paper > p {
@@ -197,6 +236,10 @@
   .text-button {
     max-width: 8rem;
     text-align: right;
+  }
+
+  .onboarding-header-actions {
+    gap: 0.65rem;
   }
 }
 

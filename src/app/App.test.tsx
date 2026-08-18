@@ -27,7 +27,14 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: 'Trois pièces. Jamais plus.' })).toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Continuer' }));
-    await user.click(screen.getByRole('button', { name: 'Entrer dans l’atelier' }));
+    expect(
+      screen.getByRole('heading', { name: 'Écrivez d’abord. Façonnez ensuite.' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Sans compte : vos tâches et vos textes restent dans ce navigateur.'),
+    ).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Préparer mon premier jet' }));
 
     expect(screen.getByRole('heading', { name: 'Préparez vos pièces.' })).toBeInTheDocument();
   });

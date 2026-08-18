@@ -170,22 +170,75 @@
   color: var(--success);
 }
 
-.completion-primary-actions {
+.completion-next-step {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--edge);
+  background: var(--paper-aged);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.completion-next-step > span,
+.completion-task-label {
+  color: var(--ember-deep);
+  font-family: var(--font-typewriter);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.completion-next-step > strong {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.completion-next-step > p {
+  margin: 0 0 0.65rem;
+  color: var(--ink-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.completion-continue {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 0.8rem;
-  margin-top: 2rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.completion-continue > div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.completion-continue strong {
+  font-family: var(--font-display);
+}
+
+.completion-continue span {
+  color: var(--ink-muted);
+  font-size: 0.72rem;
+}
+
+.completion-task-label {
+  margin: 1.25rem 0 0.7rem;
+  color: var(--ink-faint);
 }
 
 .completion-task-actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
 }
 
 .completion-task-actions button {
-  padding: 0.65rem 0.8rem;
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.8rem;
   border: 1px solid var(--edge);
   border-radius: 0;
   color: var(--ink-muted);
@@ -194,7 +247,19 @@
     0 2px 0 #bbae9b,
     0 4px 8px rgba(45, 37, 29, 0.1);
   cursor: pointer;
-  font-size: 0.76rem;
+  text-align: left;
+}
+
+.completion-task-actions button strong {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+}
+
+.completion-task-actions button span {
+  color: var(--ink-faint);
+  font-size: 0.65rem;
+  line-height: 1.35;
 }
 
 .completion-task-actions button:hover {
@@ -367,7 +432,8 @@
     height: 4.5rem;
   }
 
-  .completion-primary-actions {
+  .completion-continue,
+  .completion-task-actions {
     grid-template-columns: 1fr;
   }
 

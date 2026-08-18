@@ -100,18 +100,32 @@ export function CompletionView({
             </p>
           )}
 
-          <div className="completion-primary-actions">
+          <div className="completion-next-step">
+            <span>Étape recommandée</span>
+            <strong>Façonnez maintenant la matière.</strong>
+            <p>Relisez librement, corrigez et retirez vos marqueurs.</p>
             <KeyButton variant="primary" onClick={onRevise}>
-              Réviser ce jet
+              Ouvrir la révision
             </KeyButton>
-            <KeyButton onClick={onContinue}>+ 5 minutes</KeyButton>
           </div>
+
+          <div className="completion-continue">
+            <div>
+              <strong>Encore dans l’élan&nbsp;?</strong>
+              <span>Prolongez ce même jet sans reconfigurer la tâche.</span>
+            </div>
+            <KeyButton onClick={onContinue}>Continuer 5 min</KeyButton>
+          </div>
+
+          <p className="completion-task-label">Que devient cette tâche&nbsp;?</p>
           <div className="completion-task-actions">
             <button type="button" onClick={onCompleteTask}>
-              ✓ Cette tâche est terminée
+              <strong>Terminer la tâche</strong>
+              <span>La classer et revenir à l’atelier</span>
             </button>
             <button type="button" onClick={onReplan}>
-              La reprendre plus tard
+              <strong>La garder à l’atelier</strong>
+              <span>La reprendre lors d’un prochain sprint</span>
             </button>
           </div>
         </aside>

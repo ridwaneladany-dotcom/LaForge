@@ -76,7 +76,7 @@ describe('App', () => {
 
     expect(screen.getByRole('heading', { name: /Vous avez forgé.*3 mots/ })).toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: 'Réviser ce jet' }));
+    await user.click(screen.getByRole('button', { name: 'Ouvrir la révision' }));
     const revisionEditor = screen.getByRole('textbox', { name: 'Zone de révision libre' });
     await user.click(revisionEditor);
     await user.keyboard('{End}{Backspace}');

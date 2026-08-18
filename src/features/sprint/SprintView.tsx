@@ -10,7 +10,7 @@ type SprintViewProps = {
   onComplete: (content: string) => void;
   onContentChange: (content: string) => void;
   onExit: (content: string) => void;
-  onReturn: () => void;
+  onFinishEarly: (content: string) => void;
   sprint: WritingSprint;
   task: WritingTask;
 };
@@ -26,7 +26,7 @@ export function SprintView({
   onComplete,
   onContentChange,
   onExit,
-  onReturn,
+  onFinishEarly,
   sprint,
   task,
 }: SprintViewProps) {
@@ -36,8 +36,7 @@ export function SprintView({
   const [wordCount, setWordCount] = useState(() => countWords(draft.content));
   const [confirmExit, setConfirmExit] = useState(false);
   const latestContentRef = useRef(draft.content);
-  const completedRef = useRef(sprint.status === 'completed');
-  const isFinished = sprint.status === 'completed';
+  const completedRef = useRef(false);
 
   const progress = useMemo(() => {
     const totalSeconds = Math.max(1, sprint.durationMinutes * 60);
@@ -65,21 +64,6 @@ export function SprintView({
   function persistContent(content: string) {
     latestContentRef.current = content;
     onContentChange(content);
-  }
-
-  if (isFinished) {
-    return (
-      <main className="sprint-finished">
-        <div className="finish-sheet paper-panel">
-          <p className="eyebrow">Temps écoulé</p>
-          <h1>La pièce existe.</h1>
-          <p>Vous avez produit {wordCount} mots sans casser votre élan.</p>
-          <KeyButton variant="primary" onClick={onReturn}>
-            Voir le résultat
-          </KeyButton>
-        </div>
-      </main>
-    );
   }
 
   return (
@@ -127,11 +111,16 @@ export function SprintView({
           >
             <p className="eyebrow">Sortie anticipée</p>
             <h2 id="exit-title">Quitter le sprint&nbsp;?</h2>
-            <p>Votre texte sera conservé, mais cette session sera marquée comme interrompue.</p>
+            <p>
+              Vous pouvez valider la matière déjà produite ou quitter sans compter cette session.
+            </p>
             <div>
               <KeyButton onClick={() => setConfirmExit(false)}>Continuer d’écrire</KeyButton>
-              <KeyButton variant="primary" onClick={() => onExit(latestContentRef.current)}>
-                Quitter et conserver
+              <KeyButton onClick={() => onExit(latestContentRef.current)}>
+                Quitter sans valider
+              </KeyButton>
+              <KeyButton variant="primary" onClick={() => onFinishEarly(latestContentRef.current)}>
+                Terminer maintenant
               </KeyButton>
             </div>
           </section>

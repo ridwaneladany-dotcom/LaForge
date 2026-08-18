@@ -8,6 +8,7 @@ import './styles/global.css';
 import './styles/preparation.css';
 import './styles/onboarding.css';
 import './styles/sprint.css';
+import './styles/completion.css';
 
 const root = document.querySelector<HTMLDivElement>('#root');
 

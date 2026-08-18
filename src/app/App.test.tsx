@@ -70,6 +70,18 @@ describe('App', () => {
     await user.keyboard('{Backspace}');
 
     expect(editor).toHaveValue('Chaque lettre reste.');
+
+    await user.click(screen.getByRole('button', { name: 'Sortir' }));
+    await user.click(screen.getByRole('button', { name: 'Terminer maintenant' }));
+
+    expect(screen.getByRole('heading', { name: /Vous avez forgé.*3 mots/ })).toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: 'Réviser ce jet' }));
+    const revisionEditor = screen.getByRole('textbox', { name: 'Zone de révision libre' });
+    await user.click(revisionEditor);
+    await user.keyboard('{End}{Backspace}');
+
+    expect(revisionEditor).toHaveValue('Chaque lettre reste');
   });
 
   it('switches to the projects view', async () => {

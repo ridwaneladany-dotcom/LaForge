@@ -1,0 +1,425 @@
+.completion-screen,
+.revision-screen {
+  min-height: 100vh;
+  background-color: var(--canvas);
+  background-image: radial-gradient(rgba(62, 49, 35, 0.07) 0.55px, transparent 0.55px);
+  background-size: 5px 5px;
+}
+
+.completion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 6.5rem;
+  padding: 1rem clamp(1.25rem, 5vw, 5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.completion-header > span {
+  color: var(--ink-muted);
+  font-family: var(--font-typewriter);
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.completion-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(24rem, 0.65fr);
+  align-items: center;
+  gap: clamp(3rem, 8vw, 9rem);
+  width: min(100%, 86rem);
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 7rem) clamp(1.25rem, 4vw, 4rem);
+}
+
+.completion-copy {
+  max-width: 49rem;
+}
+
+.completion-mark {
+  display: grid;
+  width: 5.5rem;
+  height: 5.5rem;
+  margin-bottom: 2rem;
+  place-items: center;
+  border: 1px solid #1d1915;
+  background: var(--coal);
+  box-shadow:
+    0 5px 0 #171411,
+    0 12px 28px rgba(45, 36, 27, 0.25);
+  animation: forge-arrival 240ms var(--ease-out) both;
+}
+
+.completion-mark img {
+  width: 4rem;
+  height: 4rem;
+}
+
+.completion-copy h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 8vw, 8rem);
+  font-weight: 500;
+  letter-spacing: -0.07em;
+  line-height: 0.88;
+}
+
+.completion-copy > p:not(.eyebrow) {
+  max-width: 38rem;
+  margin: 2rem 0 0;
+  color: var(--ink-muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.result-ticket {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  animation: ticket-arrival 240ms var(--ease-out) 40ms both;
+}
+
+.ticket-task {
+  margin: 0 0 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  border: 1px solid var(--line);
+}
+
+.result-stats div {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-right: 1px solid var(--line);
+}
+
+.result-stats div:last-child {
+  border-right: 0;
+}
+
+.result-stats dt,
+.heat-progress span,
+.heat-progress small {
+  color: var(--ink-faint);
+  font-family: var(--font-typewriter);
+  font-size: 0.62rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.result-stats dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.heat-progress {
+  display: grid;
+  gap: 0.8rem;
+  margin: 2rem 0;
+}
+
+.heat-progress > div:first-child {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.heat-progress strong {
+  color: var(--ember-deep);
+  font-family: var(--font-typewriter);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.heat-track {
+  height: 0.55rem;
+  border: 1px solid var(--edge);
+  background: #dfd5c7;
+  box-shadow: inset 0 2px 3px rgba(45, 36, 27, 0.12);
+}
+
+.heat-track span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--ember-deep), #f07a45);
+  transition: width 240ms var(--ease-out);
+}
+
+.goal-result {
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--edge);
+  color: var(--ink-muted);
+  background: var(--paper-aged);
+  font-size: 0.82rem;
+}
+
+.goal-result[data-reached='true'] {
+  border-left-color: var(--success);
+  color: var(--success);
+}
+
+.completion-primary-actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.completion-task-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.completion-task-actions button {
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--edge);
+  border-radius: 0;
+  color: var(--ink-muted);
+  background: var(--paper-aged);
+  box-shadow:
+    0 2px 0 #bbae9b,
+    0 4px 8px rgba(45, 37, 29, 0.1);
+  cursor: pointer;
+  font-size: 0.76rem;
+}
+
+.completion-task-actions button:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.completion-task-actions button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #bbae9b;
+}
+
+.revision-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 6.5rem;
+  padding: 1rem clamp(1rem, 4vw, 4rem);
+  border-bottom: 1px solid rgba(51, 43, 34, 0.16);
+  background: rgba(238, 232, 222, 0.88);
+  backdrop-filter: blur(16px) saturate(130%);
+}
+
+.revision-header > div {
+  display: grid;
+  gap: 0.2rem;
+  justify-items: center;
+}
+
+.revision-header > div span,
+.revision-back {
+  color: var(--ink-muted);
+  font-family: var(--font-typewriter);
+  font-size: 0.67rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.revision-header > div strong {
+  max-width: 28rem;
+  overflow: hidden;
+  font-family: var(--font-display);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.revision-header .key-button {
+  justify-self: end;
+}
+
+.revision-back {
+  justify-self: start;
+  padding: 0.5rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--edge);
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.revision-desk {
+  width: min(calc(100% - 2rem), 64rem);
+  margin: 2rem auto;
+  border: 1px solid var(--edge);
+  background: var(--paper);
+  box-shadow: var(--shadow-paper);
+}
+
+.revision-note {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper-aged);
+}
+
+.revision-note span {
+  flex: none;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--success);
+  color: var(--success);
+  font-family: var(--font-typewriter);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.revision-note p {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 0.8rem;
+}
+
+.revision-editor {
+  display: block;
+  width: 100%;
+  min-height: calc(100vh - 16rem);
+  padding: clamp(2rem, 6vw, 5rem);
+  border: 0;
+  border-radius: 0;
+  color: var(--ink);
+  caret-color: var(--ember);
+  background-color: var(--paper);
+  background-image: repeating-linear-gradient(
+    transparent 0,
+    transparent 2.65rem,
+    rgba(73, 60, 46, 0.075) 2.65rem,
+    rgba(73, 60, 46, 0.075) calc(2.65rem + 1px)
+  );
+  font-family: var(--font-typewriter);
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  line-height: 2.2;
+  resize: vertical;
+}
+
+.revision-editor:focus {
+  outline: none;
+}
+
+.revision-status {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-faint);
+  background: var(--paper-aged);
+  font-family: var(--font-typewriter);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@keyframes forge-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(0.8rem) scale(0.96);
+  }
+}
+
+@keyframes ticket-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+@media (max-width: 760px) {
+  .completion-header {
+    min-height: 5.25rem;
+  }
+
+  .completion-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-top: 3rem;
+  }
+
+  .completion-copy h1 {
+    font-size: clamp(3.5rem, 17vw, 5rem);
+  }
+
+  .completion-mark {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  .completion-primary-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .completion-task-actions {
+    display: grid;
+  }
+
+  .revision-header {
+    grid-template-columns: 1fr auto;
+    min-height: 7.5rem;
+  }
+
+  .revision-header > div {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .revision-back,
+  .revision-header .key-button {
+    grid-row: 2;
+  }
+
+  .revision-note,
+  .revision-status {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .revision-editor {
+    min-height: calc(100vh - 18rem);
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .completion-mark,
+  .result-ticket {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .revision-header {
+    background: var(--canvas);
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .revision-header {
+    border-bottom-color: var(--ink);
+    background: var(--canvas);
+    backdrop-filter: none;
+  }
+}

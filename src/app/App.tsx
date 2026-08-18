@@ -1,5 +1,12 @@
 import { useState } from 'react';
 
+import { CompletionView } from '../features/completion/CompletionView';
+import { RevisionView } from '../features/completion/RevisionView';
+import {
+  completeTask,
+  continueSprint,
+  createRevisionDraft,
+} from '../features/completion/completionState';
 import { Onboarding } from '../features/onboarding/Onboarding';
 import { PreparationView } from '../features/preparation/PreparationView';
 import { SprintView } from '../features/sprint/SprintView';
@@ -12,10 +19,15 @@ import {
 import { AppShell, type AppView } from './AppShell';
 import { usePersistentAppState } from './usePersistentAppState';
 
+function createId() {
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
 export function App() {
   const [activeView, setActiveView] = useState<AppView>('today');
   const [state, setState] = usePersistentAppState();
   const [viewedSprintId, setViewedSprintId] = useState<string | null>(null);
+  const [revisionDraftId, setRevisionDraftId] = useState<string | null>(null);
 
   if (!state.preferences.hasCompletedOnboarding) {
     return (
@@ -37,12 +49,76 @@ export function App() {
   if (viewedSprint) {
     const draft = state.drafts.find((candidate) => candidate.id === viewedSprint.draftId);
     const task = state.tasks.find((candidate) => candidate.id === viewedSprint.taskId);
+    const revisionDraft = state.drafts.find((candidate) => candidate.id === revisionDraftId);
 
-    if (draft && task) {
+    if (draft && task && revisionDraft) {
+      return (
+        <RevisionView
+          draft={revisionDraft}
+          task={task}
+          onBack={() => setRevisionDraftId(null)}
+          onContentChange={(content) =>
+            setState((currentState) =>
+              updateDraftContent(currentState, revisionDraft.id, content, new Date().toISOString()),
+            )
+          }
+          onCompleteTask={() => {
+            setState((currentState) =>
+              completeTask(currentState, task.id, new Date().toISOString()),
+            );
+            setRevisionDraftId(null);
+            setViewedSprintId(null);
+          }}
+        />
+      );
+    }
+
+    if (draft && task && viewedSprint.status === 'completed') {
+      return (
+        <CompletionView
+          draft={draft}
+          practice={state.practice}
+          sprint={viewedSprint}
+          task={task}
+          onRevise={() => {
+            const id = createId();
+            setState((currentState) =>
+              createRevisionDraft(currentState, draft.id, id, new Date().toISOString()),
+            );
+            setRevisionDraftId(`draft-${id}`);
+          }}
+          onContinue={() => {
+            const id = createId();
+            setState((currentState) =>
+              continueSprint(currentState, viewedSprint.id, id, new Date().toISOString()),
+            );
+            setViewedSprintId(`sprint-${id}`);
+          }}
+          onCompleteTask={() => {
+            setState((currentState) =>
+              completeTask(currentState, task.id, new Date().toISOString()),
+            );
+            setViewedSprintId(null);
+          }}
+          onReplan={() => setViewedSprintId(null)}
+        />
+      );
+    }
+
+    if (draft && task && viewedSprint.status === 'running') {
       const persistDraft = (content: string) =>
         setState((currentState) =>
           updateDraftContent(currentState, draft.id, content, new Date().toISOString()),
         );
+      const finishSprint = (content: string) =>
+        setState((currentState) => {
+          const timestamp = new Date().toISOString();
+          return completeSprint(
+            updateDraftContent(currentState, draft.id, content, timestamp),
+            viewedSprint.id,
+            timestamp,
+          );
+        });
 
       return (
         <SprintView
@@ -50,16 +126,8 @@ export function App() {
           sprint={viewedSprint}
           task={task}
           onContentChange={persistDraft}
-          onComplete={(content) =>
-            setState((currentState) => {
-              const timestamp = new Date().toISOString();
-              return completeSprint(
-                updateDraftContent(currentState, draft.id, content, timestamp),
-                viewedSprint.id,
-                timestamp,
-              );
-            })
-          }
+          onComplete={finishSprint}
+          onFinishEarly={finishSprint}
           onExit={(content) => {
             setState((currentState) => {
               const timestamp = new Date().toISOString();
@@ -71,14 +139,13 @@ export function App() {
             });
             setViewedSprintId(null);
           }}
-          onReturn={() => setViewedSprintId(null)}
         />
       );
     }
   }
 
   function launchSprint(taskId: string) {
-    const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    const id = createId();
     setState((currentState) => startSprint(currentState, taskId, id, new Date().toISOString()));
     setViewedSprintId(`sprint-${id}`);
   }

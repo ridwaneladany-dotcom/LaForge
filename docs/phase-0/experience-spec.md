@@ -179,10 +179,10 @@ L'accent braise ne colore jamais de grandes surfaces pendant l'écriture. Il doi
 
 - Surfaces opaques pour les zones de lecture.
 - Translucidité seulement pour le chrome flottant et la feuille de sortie.
-- Contrôles identifiables par une forme, un bord, un reflet supérieur et une ombre noire courte.
+- Contrôles identifiables par une forme angulaire, un bord, un reflet supérieur et une ombre noire de contact clairement visible.
 - Surfaces principales plus profondes que les contrôles qu'elles contiennent, sans empiler des cartes décoratives.
-- La pression réduit l'ombre et déplace le contrôle d'un pixel pour donner un retour physique immédiat.
-- Rayons modérés : l'outil doit être accueillant sans devenir ludique ou enfantin.
+- La pression réduit l'ombre et enfonce légèrement le contrôle pour donner un retour physique immédiat.
+- Angles francs ou très faiblement adoucis : la matière évoque une plaque forgée, alignée et précise, jamais une collection de bulles.
 
 ## Principes de mouvement
 

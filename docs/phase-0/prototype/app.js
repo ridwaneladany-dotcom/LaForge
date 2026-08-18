@@ -16,6 +16,8 @@ const toast = document.querySelector("#toast");
 let state = loadState();
 let timerHandle = null;
 let toastHandle = null;
+let persistenceHandle = null;
+let isComposing = false;
 
 function defaultState() {
   return {
@@ -40,6 +42,16 @@ function loadState() {
 
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function scheduleStateSave() {
+  clearTimeout(persistenceHandle);
+  persistenceHandle = window.setTimeout(saveState, 220);
+}
+
+function flushState() {
+  clearTimeout(persistenceHandle);
+  saveState();
 }
 
 function setView(view) {
@@ -110,7 +122,7 @@ function updateTimer() {
 
 function finishSprint() {
   clearInterval(timerHandle);
-  state.draft = editor.innerText.trim();
+  state.draft = editor.textContent.trim();
   state.reviewing = false;
   updateResult();
   setView("result");
@@ -118,7 +130,7 @@ function finishSprint() {
 }
 
 function stopAndKeep() {
-  state.draft = editor.innerText.trim();
+  state.draft = editor.textContent.trim();
   state.endsAt = null;
   state.startedAt = null;
   state.reviewing = false;
@@ -156,31 +168,26 @@ function selectionIsAtEnd() {
   const selection = window.getSelection();
   if (!selection || !selection.rangeCount || !selection.isCollapsed) return false;
 
-  const activeRange = selection.getRangeAt(0).cloneRange();
-  const endRange = document.createRange();
-  endRange.selectNodeContents(editor);
-  endRange.collapse(false);
-  return activeRange.compareBoundaryPoints(Range.START_TO_START, endRange) === 0;
+  const activeRange = selection.getRangeAt(0);
+  if (activeRange.endContainer !== editor && !editor.contains(activeRange.endContainer)) return false;
+
+  const contentAfterCaret = activeRange.cloneRange();
+  contentAfterCaret.selectNodeContents(editor);
+  contentAfterCaret.setStart(activeRange.endContainer, activeRange.endOffset);
+  return contentAfterCaret.toString().length === 0;
 }
 
 function keepWritingForward(event) {
-  const blockedInputs = new Set([
-    "deleteContentBackward",
-    "deleteContentForward",
-    "deleteWordBackward",
-    "deleteWordForward",
-    "deleteSoftLineBackward",
-    "deleteSoftLineForward",
-    "deleteHardLineBackward",
-    "deleteHardLineForward",
-    "historyUndo",
-    "historyRedo",
-  ]);
+  if (isComposing || event.isComposing || event.inputType === "insertCompositionText") return;
 
-  if (blockedInputs.has(event.inputType) || !selectionIsAtEnd()) {
+  const isDeletion = event.inputType.startsWith("delete");
+  const isHistory = event.inputType === "historyUndo" || event.inputType === "historyRedo";
+  const isInsertionAwayFromEnd = event.inputType.startsWith("insert") && !selectionIsAtEnd();
+
+  if (isDeletion || isHistory || isInsertionAwayFromEnd) {
     event.preventDefault();
     placeCaretAtEnd(editor);
-    showToast("Vers l'avant uniquement");
+    showToast(isDeletion || isHistory ? "Tu pourras corriger à la fin" : "Continue depuis la fin du texte");
   }
 }
 
@@ -194,8 +201,9 @@ function handleEditorKeydown(event) {
     "Delete",
   ]);
 
-  const undo = (event.ctrlKey || event.metaKey) && ["z", "y"].includes(event.key.toLowerCase());
-  if (blockedKeys.has(event.key) || undo) {
+  const editingShortcut =
+    (event.ctrlKey || event.metaKey) && ["a", "z", "y"].includes(event.key.toLowerCase());
+  if (blockedKeys.has(event.key) || editingShortcut) {
     event.preventDefault();
     placeCaretAtEnd(editor);
     showToast("Tu pourras corriger à la fin");
@@ -290,11 +298,25 @@ document.querySelector("#next-task").addEventListener("click", () => {
 
 enableForwardOnly();
 editor.addEventListener("input", () => {
-  state.draft = editor.innerText;
-  saveState();
+  state.draft = editor.textContent;
+  scheduleStateSave();
 });
 editor.addEventListener("click", () => {
   if (!selectionIsAtEnd()) placeCaretAtEnd(editor);
+});
+editor.addEventListener("compositionstart", () => {
+  isComposing = true;
+});
+editor.addEventListener("compositionend", () => {
+  isComposing = false;
+  state.draft = editor.textContent;
+  scheduleStateSave();
+  placeCaretAtEnd(editor);
+});
+
+window.addEventListener("beforeunload", flushState);
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") flushState();
 });
 
 window.addEventListener("storage", () => {

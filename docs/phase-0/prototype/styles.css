@@ -645,8 +645,6 @@ body[data-view="result"] .result-view {
   caret-color: var(--ember);
   outline: none;
   white-space: pre-wrap;
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), #000 36%, #000 100%);
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), #000 36%, #000 100%);
 }
 
 .editor:empty::before {

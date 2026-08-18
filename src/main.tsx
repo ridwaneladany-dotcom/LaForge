@@ -7,6 +7,7 @@ import './styles/tokens.css';
 import './styles/global.css';
 import './styles/preparation.css';
 import './styles/onboarding.css';
+import './styles/install.css';
 import './styles/sprint.css';
 import './styles/completion.css';
 
@@ -23,3 +24,9 @@ createRoot(root).render(
     </AppErrorBoundary>
   </StrictMode>,
 );
+
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  window.addEventListener('load', () => {
+    void navigator.serviceWorker.register('/sw.js');
+  });
+}

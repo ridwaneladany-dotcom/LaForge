@@ -1,0 +1,25 @@
+{
+  "name": "LaForge — Écrire sans revenir en arrière",
+  "short_name": "LaForge",
+  "description": "Transformez une intention en premier jet grâce à des sprints d’écriture focalisée.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#eee8de",
+  "theme_color": "#302b25",
+  "lang": "fr",
+  "categories": ["productivity", "education", "writing"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

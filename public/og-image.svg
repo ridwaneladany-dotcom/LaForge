@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="coal" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#35302b"/>
+      <stop offset="1" stop-color="#211e1a"/>
+    </linearGradient>
+    <pattern id="grain" width="8" height="8" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.65" fill="#3e3123" opacity=".12"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#eee8de"/>
+  <rect width="1200" height="630" fill="url(#grain)"/>
+  <path d="M0 514H1200" stroke="#c8bcaa"/>
+  <g transform="translate(76 74)">
+    <rect width="128" height="128" rx="6" fill="url(#coal)"/>
+    <path d="M22 69h84M34 69l10 29h40l10-29M36 51h56l17-22H19l17 22Z" fill="none" stroke="#fffdf8" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter"/>
+    <path d="M64 29C47 17 59 4 70-5c-1 12 16 18 7 34" fill="none" stroke="#d4512d" stroke-width="6" stroke-linecap="square"/>
+  </g>
+  <text x="236" y="154" fill="#26221d" font-family="Georgia, serif" font-size="74" font-weight="700">LaForge</text>
+  <text x="76" y="326" fill="#26221d" font-family="Georgia, serif" font-size="68">Écrivez d’abord.</text>
+  <text x="76" y="403" fill="#26221d" font-family="Georgia, serif" font-size="68">Façonnez ensuite.</text>
+  <text x="78" y="555" fill="#a93219" font-family="Courier New, monospace" font-size="24" font-weight="700" letter-spacing="4">L’ATELIER D’ÉCRITURE FOCALISÉE</text>
+</svg>

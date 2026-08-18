@@ -1,0 +1,53 @@
+.header-actions {
+  display: flex;
+  justify-self: end;
+}
+
+.install-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.install-key svg {
+  width: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  stroke-width: 1.7;
+}
+
+.install-dialog {
+  width: min(calc(100% - 2rem), 31rem);
+  padding: clamp(1.75rem, 5vw, 3rem);
+  color: var(--ink);
+}
+
+.install-dialog::backdrop {
+  background: rgba(38, 34, 29, 0.62);
+}
+
+.install-dialog h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.install-dialog ol {
+  display: grid;
+  gap: 0.9rem;
+  margin: 2rem 0;
+  padding-left: 1.4rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+@media (max-width: 760px) {
+  .install-key {
+    padding-inline: 0.85rem;
+  }
+}

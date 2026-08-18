@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 import forgeMark from '../../assets/laforge-mark.svg';
 import { KeyButton } from '../components/KeyButton';
+import { InstallAppButton } from '../features/install/InstallAppButton';
 
 export type AppView = 'today' | 'projects';
 
@@ -29,9 +30,9 @@ export function AppShell({ activeView, children, onViewChange }: AppShellProps) 
           </KeyButton>
         </nav>
 
-        <button className="profile-key" type="button" aria-label="Ouvrir le profil">
-          RL
-        </button>
+        <div className="header-actions">
+          <InstallAppButton />
+        </div>
       </header>
       <main className="app-content">{children}</main>
     </div>

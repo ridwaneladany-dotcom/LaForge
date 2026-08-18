@@ -9,6 +9,8 @@ function createTask(index: number): WritingTask {
     projectId: 'project-1',
     title: `Tâche ${index}`,
     seed: '',
+    durationMinutes: 15,
+    wordGoal: null,
     order: index,
     status: 'ready',
     createdAt: '2026-08-18T00:00:00.000Z',

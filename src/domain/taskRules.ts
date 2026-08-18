@@ -29,3 +29,16 @@ export function validateTaskTitle(title: string): string | null {
 
   return null;
 }
+
+const VAGUE_OPENINGS = /^(avancer|continuer|faire|travailler|réfléchir|voir)\b/iu;
+
+export function getTaskGuidance(title: string): string {
+  const normalizedTitle = normalizeTaskTitle(title);
+
+  if (!normalizedTitle) return 'Commence par un verbe : rédiger, résumer, expliquer, comparer…';
+  if (VAGUE_OPENINGS.test(normalizedTitle)) {
+    return 'Précise le résultat visible. Exemple : « Rédiger l’introduction en 300 mots ».';
+  }
+
+  return 'La pièce est assez précise pour entrer dans la forge.';
+}

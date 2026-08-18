@@ -1,7 +1,7 @@
-export const STORAGE_VERSION = 1 as const;
+export const STORAGE_VERSION = 2 as const;
 export const SPRINT_DURATIONS = [5, 15, 25, 45] as const;
 
-export type SprintDuration = (typeof SPRINT_DURATIONS)[number];
+export type SprintDuration = number;
 export type TaskStatus = 'ready' | 'active' | 'completed' | 'archived';
 export type SprintStatus = 'running' | 'completed' | 'exited';
 
@@ -23,6 +23,8 @@ export interface WritingTask {
   projectId: string;
   title: string;
   seed: string;
+  durationMinutes: SprintDuration;
+  wordGoal: number | null;
   order: number;
   status: TaskStatus;
   createdAt: string;

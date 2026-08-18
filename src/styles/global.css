@@ -259,6 +259,16 @@ a:focus-visible {
   text-align: center;
 }
 
+.state-card > p:not(.eyebrow) {
+  color: var(--ink-muted);
+  line-height: 1.6;
+}
+
+.error-code {
+  font-family: var(--font-typewriter);
+  font-size: 0.76rem;
+}
+
 .loading-mark {
   display: block;
   width: 1.5rem;

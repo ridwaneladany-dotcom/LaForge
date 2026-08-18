@@ -1,4 +1,4 @@
-export const STORAGE_VERSION = 2 as const;
+export const STORAGE_VERSION = 3 as const;
 export const SPRINT_DURATIONS = [5, 15, 25, 45] as const;
 
 export type SprintDuration = number;
@@ -46,6 +46,7 @@ export interface WritingSprint {
   durationMinutes: SprintDuration;
   wordGoal: number | null;
   startedAt: string;
+  plannedEndAt: string;
   endedAt: string | null;
   status: SprintStatus;
 }

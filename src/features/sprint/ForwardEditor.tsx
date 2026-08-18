@@ -11,6 +11,7 @@ import {
 import { countWords } from './wordCount';
 
 type ForwardEditorProps = {
+  disabled?: boolean;
   initialContent: string;
   onContentChange: (content: string) => void;
   onWordCountChange: (wordCount: number) => void;
@@ -19,6 +20,7 @@ type ForwardEditorProps = {
 const BLOCKED_KEYS = new Set(['ArrowLeft', 'ArrowUp', 'Backspace', 'Delete', 'Home', 'PageUp']);
 
 export function ForwardEditor({
+  disabled = false,
   initialContent,
   onContentChange,
   onWordCountChange,
@@ -68,6 +70,10 @@ export function ForwardEditor({
       onContentChangeRef.current(contentRef.current);
     };
   }, []);
+
+  useEffect(() => {
+    if (disabled) editorRef.current?.blur();
+  }, [disabled]);
 
   function handleBeforeInput(event: FormEvent<HTMLTextAreaElement>) {
     if (composingRef.current) return;
@@ -135,6 +141,7 @@ export function ForwardEditor({
         ref={editorRef}
         className="forward-editor"
         defaultValue={initialContent}
+        disabled={disabled}
         aria-label="Zone d’écriture du sprint"
         autoCapitalize="sentences"
         autoCorrect="on"
@@ -147,7 +154,7 @@ export function ForwardEditor({
         placeholder="Frappez la première phrase…"
         spellCheck
       />
-      <button className="marker-key" type="button" onClick={addMarker}>
+      <button className="marker-key" type="button" disabled={disabled} onClick={addMarker}>
         <kbd>⌘</kbd> Marquer [À REVOIR]
       </button>
       <p className="visually-hidden" aria-live="polite">

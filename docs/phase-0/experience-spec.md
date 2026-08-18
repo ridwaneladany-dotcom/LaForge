@@ -65,7 +65,9 @@ flowchart LR
 
 ### 6. Bilan
 
-- Le texte se déverrouille immédiatement.
+- À la fin naturelle du temps, une montre mécanique occupe l’écran pendant 4,2 secondes et rend l’arrêt du sprint impossible à manquer.
+- Le tic-tac et la sonnerie restent contrôlables par un bouton explicite ; le texte est conservé même si l’audio est indisponible.
+- Après ce signal bref, le texte se déverrouille automatiquement dans le bilan.
 - Les chiffres apparaissent comme preuve d'effort, pas comme score.
 - La carte de jet rejoint visuellement l'historique.
 - Deux actions dominent : `Réviser le texte` et `Tâche suivante`.
@@ -194,6 +196,7 @@ L'accent braise ne colore jamais de grandes surfaces pendant l'écriture. Il doi
 | Passage au sprint | Continuité spatiale | Le panneau actif s'étend et le chrome s'efface, 220–240 ms |
 | Changement de tâche | État | Transition de couleur quasi instantanée, sans déplacement décoratif |
 | Feuille de sortie | Compréhension spatiale | Entrée depuis le bas sur mobile, fondu centré sur desktop, 240 ms |
+| Temps écoulé | Indication d’état rare | Montre mécanique plein écran pendant 4,2 s, puis passage automatique au bilan |
 | Fin d'un jet | Récompense rare | Trait de braise + carte qui se matérialise, 260 ms maximum |
 | Saisie clavier | Fréquence élevée | Aucune animation par caractère |
 

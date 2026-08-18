@@ -10,6 +10,7 @@ import {
 import { Onboarding } from '../features/onboarding/Onboarding';
 import { PreparationView } from '../features/preparation/PreparationView';
 import { SprintView } from '../features/sprint/SprintView';
+import { unlockClockAudio } from '../features/sprint/clockAudio';
 import {
   completeSprint,
   exitSprint,
@@ -128,6 +129,13 @@ export function App() {
           onContentChange={persistDraft}
           onComplete={finishSprint}
           onFinishEarly={finishSprint}
+          soundEnabled={state.preferences.soundEnabled}
+          onSoundToggle={(soundEnabled) =>
+            setState((currentState) => ({
+              ...currentState,
+              preferences: { ...currentState.preferences, soundEnabled },
+            }))
+          }
           onExit={(content) => {
             setState((currentState) => {
               const timestamp = new Date().toISOString();
@@ -145,6 +153,7 @@ export function App() {
   }
 
   function launchSprint(taskId: string) {
+    if (state.preferences.soundEnabled) void unlockClockAudio();
     const id = createId();
     setState((currentState) => startSprint(currentState, taskId, id, new Date().toISOString()));
     setViewedSprintId(`sprint-${id}`);

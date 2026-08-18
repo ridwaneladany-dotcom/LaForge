@@ -37,7 +37,7 @@ La récompense est déterministe et liée à l'effort :
 - carte de jet ajoutée à l'historique ;
 - augmentation de la **braise**, représentation douce de la pratique récente.
 
-La célébration est réservée à la fin d'un sprint. Elle dure moins de 300 ms, ne bloque aucune action et disparaît avec `prefers-reduced-motion`.
+La fin naturelle du temps est signalée par une montre mécanique plein écran pendant 4,2 secondes. Elle bloque uniquement la poursuite de la saisie déjà arrivée à son terme, conserve le texte et respecte le réglage sonore. La célébration du bilan qui suit dure moins de 300 ms et perd ses translations avec `prefers-reduced-motion`.
 
 ### 5. Investissement
 
@@ -127,4 +127,3 @@ Le titre des projets, le texte des tâches, les amorces et le contenu rédigé s
 3. La braise sur sept jours motive mieux la reprise qu'une série remise à zéro.
 4. Montrer le nombre de mots seulement à la fin réduit l'auto-jugement pendant le sprint.
 5. Une sortie claire augmente la confiance sans augmenter significativement les abandons.
-

@@ -77,7 +77,7 @@ export function createInitialState(): AppState {
     preferences: {
       defaultDuration: 15,
       hasCompletedOnboarding: false,
-      soundEnabled: false,
+      soundEnabled: true,
     },
     projects: [],
     tasks: [],

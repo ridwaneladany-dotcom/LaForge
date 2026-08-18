@@ -1,0 +1,25 @@
+:root {
+  --canvas: #eee8de;
+  --paper: #fffdf7;
+  --paper-aged: #f7f0e3;
+  --edge: #c8bcaa;
+  --ink: #26221d;
+  --ink-muted: #6f675d;
+  --ink-faint: #9a9083;
+  --line: rgba(51, 43, 34, 0.18);
+  --ember: #d4512d;
+  --ember-deep: #a93219;
+  --coal: #302b25;
+  --success: #3f7651;
+  --font-ui: Inter, Avenir, ui-sans-serif, system-ui, sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-typewriter: 'Courier Prime', 'Courier New', monospace;
+  --shadow-paper:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 16px 32px rgba(49, 39, 28, 0.1),
+    0 3px 0 rgba(82, 68, 53, 0.18);
+  --shadow-key:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 3px 0 #b7aa98, 0 5px 10px rgba(45, 37, 29, 0.16);
+  --shadow-key-pressed:
+    0 1px 0 rgba(255, 255, 255, 0.45) inset, 0 1px 0 #b7aa98, 0 2px 4px rgba(45, 37, 29, 0.12);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
